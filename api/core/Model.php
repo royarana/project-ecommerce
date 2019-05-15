@@ -20,6 +20,53 @@ Class Model {
 		$this->_setConnection();
 	}
 
+	function create($data) {
+		$params = [];
+		$columns = [];
+		$values = [];
+		$qs = [];
+
+		foreach($data as $key => $value) {
+			$params[] = $this->getType($value);
+			$columns[] = $key;
+			$values[] = $value;
+			$qs[] = "?";
+		}
+
+		$colStmt = implode(", ", $columns);
+		$valStmt = implode(", ", $qs);
+
+		$insertStmt = "INSERT INTO {$this->_table} ({$colStmt}) values ({$valStmt})";
+		$stmt = $this->_conn->prepare($insertStmt);
+		$stmt->bind_param(implode("", $params), ...$values);
+		$stmt->execute();
+		return $stmt->insert_id;
+	}
+
+	function update($data) {
+		$whereStmt = $this->whereStmt();
+		$values = [];
+		$params = [];
+
+		foreach($data as $key => $value) {
+			$columns[] = "{$key} = ?";
+			$values[] = $value;
+			$params[] = $this->getType($value);
+		}
+
+		foreach($this->_values as $value) {
+			$values[] = $value;
+			$params[] = $this->getType($value);
+		}
+
+		$colStmt = implode(",", $columns);
+		$stmt = "UPDATE {$this->_table} set {$colStmt} {$whereStmt}";
+		$updateStmt = $this->_conn->prepare($stmt);
+		$updateStmt->bind_param(implode("", $params), ...$values);
+
+		return $updateStmt->execute();
+	}
+
 	function clear() {
 		 $this->_columns = [];
 		 $this->_where = [];
@@ -104,25 +151,30 @@ Class Model {
 		return $rows[0];
 	}
 
-	function getRows() {
-		$result = [];
-		$joinStr = "";
-		$whereStr = "";
-
-		if (!empty($this->_joins)) {
-
-			foreach( $this->_joins as $join ) {
-				$joinStr .= " {$join["join"]} {$join["value"]}";
-			}
-		}
-
+	function whereStmt() {
 		if (!empty($this->_where)) {
+			$whereStr = "";
 			foreach( $this->_where as $where ) {
 				if ($whereStr === "") {
 					$whereStr .= " WHERE {$where["value"]}";
 				} else {
 					$whereStr .= " {$where["key"]} {$where["value"]}";
 				}
+			}
+			return $whereStr;
+		}
+		return "";
+	}
+
+	function getRows() {
+		$result = [];
+		$joinStr = "";
+		$whereStr = $this->whereStmt();
+
+		if (!empty($this->_joins)) {
+
+			foreach( $this->_joins as $join ) {
+				$joinStr .= " {$join["join"]} {$join["value"]}";
 			}
 		}
 
@@ -142,7 +194,7 @@ Class Model {
 
 		if (!empty($this->_values)) {
 			foreach($this->_values as $value ) {
-				$val = strtolower(gettype($value)[0]);
+				$val = $this->getType($value);
 				$params[] = $val;
 			}
 			$stmt->bind_param(implode("", $params), ...$this->_values);
@@ -157,16 +209,22 @@ Class Model {
 
 		return $result;
 	}
+
+	function getType($value) {
+		return strtolower(gettype($value)[0]);
+	}
 } 
+
 
 class Test extends Model {
 	function __construct() {
 		parent::__construct("TEST");
 	}
 }
-
 $TestModel = new Test();
 
+/*
+For Where and Inner Joins
 	$TestModel->select("test_join.*");
 	$TestModel->where("test.id", 2, ">=");
 	$TestModel->orWhere("test.id", 1, "=");
@@ -174,4 +232,23 @@ $TestModel = new Test();
 	$TestModel->leftJoin("test_join", "test.id", "test_join.id");
 	$result = $TestModel->getRows();
 	print_r($result);
+*/
+
+/*
+For Created
+$id = $TestModel->create(array("username" => "sample_user"));
+print_r($id);
+
+*/
+
+/*
+
+For Updates
+$TestModel->where('id', 5);
+$res = $TestModel->update(
+	array(
+		"username" => "eticles"
+	)
+);
+*/
 ?>
