@@ -215,14 +215,14 @@ Class Model {
 	}
 } 
 
-
+/*
 class Test extends Model {
 	function __construct() {
 		parent::__construct("TEST");
 	}
 }
 $TestModel = new Test();
-
+*/
 /*
 For Where and Inner Joins
 	$TestModel->select("test_join.*");
