@@ -215,6 +215,8 @@ Class Model {
 	}
 } 
 
+http_response_code(404)
+
 /*
 class Test extends Model {
 	function __construct() {
@@ -223,6 +225,7 @@ class Test extends Model {
 }
 $TestModel = new Test();
 */
+
 /*
 For Where and Inner Joins
 	$TestModel->select("test_join.*");
