@@ -2,6 +2,8 @@
 	
 	define("SITE_ROOT", getcwd());
 	define("API_SERVICE", SITE_ROOT."/api/core/Service.php");
+	define("API_MODEL", SITE_ROOT."/api/core/Model.php");
+	define("MODELS", SITE_ROOT."/api/Models/");
 
 	require './api/routes.php';
 

@@ -1,14 +1,17 @@
 <?php
 
     require API_SERVICE;
-
+    require MODELS."TestModel.php";
+    
 	class AddUser extends Controller {
+        
 		function __construct($body, $params, $get) {
-            parent::__construct($body, $params, $get);
+            global $TestModel;
+            parent::__construct($body, $params, $get, $TestModel, $TestModel);
         }
 
         function run() {
-            echo "RUN";
+          echo $this->TestModel->showTableName();
         }
     }
     

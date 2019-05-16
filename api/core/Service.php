@@ -11,7 +11,6 @@
 		public $body;
 		public $params;
 		public $get;
-
 		
         public function sanitazion() {
 
@@ -25,10 +24,13 @@
 			echo "Controller";
 		}
 		
-		function __construct($body, $params, $get) {
+		function __construct($body, $params, $get, ...$args) {
 			$this->body = $body;
 			$this->params = $params;
 			$this->get = $get;
+			foreach($args as $arg) {
+				$this->{$arg->showTableName()} = $arg;
+			}
 			$this->run();
 		}
 

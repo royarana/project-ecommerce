@@ -1,7 +1,6 @@
 <?php
 
-require './db.php';
-
+require SITE_ROOT.'/api/core/db.php';
 
 Class Model {
 	private $_columns = [];
@@ -13,11 +12,15 @@ Class Model {
 	private $_joins = [];
 	private $_select = [];
 
-	function __construct($table) {
+	function __construct() {
 		global $CONFIG;
-		$this->_table = $table;
+		$this->_table = get_class($this);
 		$this->_connString = $CONFIG;
 		$this->_setConnection();
+	}
+
+	function showTableName() {
+		return $this->_table;
 	}
 
 	function create($data) {
@@ -214,8 +217,6 @@ Class Model {
 		return strtolower(gettype($value)[0]);
 	}
 } 
-
-http_response_code(404)
 
 /*
 class Test extends Model {
