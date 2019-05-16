@@ -77,18 +77,6 @@
 		header('Content-Type: application/json');
 		http_response_code(500);
 		echo json_encode(array("message" => "NO API FOUND"));
-	} 
-	else if (strpos(url(), $publicDir)) {
-		$file = SITE_ROOT."/".$pathInfo;
-		if (!file_exists($file)) {
-			http_response_code(500);
-			$response = array(
-				"message" => "Web file not found...!"
-			);
-			echo json_encode($response);
-		} else {
-			require $file;
-		}
 	}
 	else {
 		header('Content-Type: application/json');

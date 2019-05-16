@@ -1,0 +1,19 @@
+<svg id="slider_arrow-next" data-name="slider arrow-next" xmlns="http://www.w3.org/2000/svg" width="51.69" height="51.688" viewBox="0 0 51.69 51.688">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #30318b;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #ffe41e;
+      }
+    </style>
+  </defs>
+  <path id="Shape_15_copy" data-name="Shape 15 copy" class="cls-1" d="M1151.53,292.868v51.695h-51.7V292.868h51.7Z" transform="translate(-1099.84 -292.875)"/>
+  <path id="Shape_16_copy" data-name="Shape 16 copy" class="cls-2" d="M1120.03,333.685l7.64-13.406-7.64-13.407h6.48l7.64,13.407-7.64,13.406h-6.48Z" transform="translate(-1099.84 -292.875)"/>
+</svg>
