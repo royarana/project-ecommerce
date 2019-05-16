@@ -15,8 +15,12 @@
             $this->body = $gump->sanitize($this->body);
             
             $gump->validation_rules(array(
-                'username'    => 'required|alpha_numeric|max_len,100|min_len,6',
-                'password'    => 'required|max_len,100|min_len,6'
+                'username'    => 'required|alpha_numeric|max_len,100|min_len,6|max_len,50',
+                'full_name'    => 'required|alpha_numeric|max_len,100|min_len,6|max_len,100',
+                'password'    => 'required|max_len,100|min_len,6|max_len,50',
+                'gender' => 'required|max_len,1|contains,M,F',
+                'birthday' => 'required|date',
+                'email' => 'required|valid_email'
             ));
 
             $validated_data = $gump->run($_POST);
