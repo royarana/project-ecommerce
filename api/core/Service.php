@@ -6,6 +6,8 @@
 		public function run();
 	}
 
+	require_once SITE_ROOT."/api/Libraries/GUMP-master/gump.class.php";
+	
 	class Controller implements Api {
 		public $data;
 		public $body;
@@ -25,12 +27,16 @@
 		}
 		
 		function __construct($body, $params, $get, ...$args) {
+			$this->gump = new GUMP();
 			$this->body = $body;
 			$this->params = $params;
 			$this->get = $get;
+
 			foreach($args as $arg) {
 				$this->{$arg->showTableName()."Model"} = $arg;
 			}
+			$this->middleware();
+			$this->sanitazion();
 			$this->run();
 		}
 
@@ -42,6 +48,11 @@
 				"message" => $message
 			);
 			echo json_encode($response);
+			exit;
+		}
+
+		function validationErr($data) {
+			$this->response($data, "Validation Error...!", 400);
 		}
 	}
 ?>

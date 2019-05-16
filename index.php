@@ -7,7 +7,7 @@
 
 	require './api/routes.php';
 
-	function url(){
+	function url() {
 	    if(isset($_SERVER['HTTPS'])){
 	        $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
 	    }
