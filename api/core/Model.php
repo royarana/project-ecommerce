@@ -5,12 +5,15 @@ define("MYSQL_CONN_ERROR", "Unable to connect to database.");
 mysqli_report(MYSQLI_REPORT_STRICT); 
 require SITE_ROOT.'/api/core/db.php';
 require_once SITE_ROOT."/api/Libraries/Response.php";
+<<<<<<< HEAD
 function myErrorHandler($errno, $errstr, $errfile, $errline) {
     echo "<b>Custom error:</b> [$errno] $errstr<br>";
     echo " Error on line $errline in $errfile<br>";
 }
 
 set_error_handler("myErrorHandler");
+=======
+>>>>>>> master
 
 Class Model extends Response {
 	private $_columns = [];
