@@ -11,7 +11,11 @@
         }
 
         function run() {
-           $models = $this->TestModel->get();
+           $models = $this->TestModel->getOne();
+           $this->response(
+                $models,
+                "Retrieve Data Successfully"
+           );
         }
     }
     

@@ -10,11 +10,11 @@ Class Model {
 	private $_where = [];
 	private $_values = [];
 	private $_joins = [];
-	private $_select = [];
+	private $_select = null;
 
 	function __construct() {
 		global $CONFIG;
-		$this->_table = get_class($this);
+		$this->_table = str_replace("Model", "" , get_class($this));
 		$this->_connString = $CONFIG;
 		$this->_setConnection();
 	}
@@ -75,7 +75,7 @@ Class Model {
 		 $this->_where = [];
 		 $this->_values = [];
 		 $this->_joins = [];
-		 $this->_select = [];
+		 $this->_select = null;
 	}
 
 	function _setConnection() {
@@ -144,45 +144,23 @@ Class Model {
 		return $rows;
 	}
 
-	function getOne() {
-		$rows = $this->getRows();
-
-		if (!empty($rows)) {
-			return array();
-		}
-
-		return $rows[0];
-	}
-
-	function whereStmt() {
-		if (!empty($this->_where)) {
-			$whereStr = "";
-			foreach( $this->_where as $where ) {
-				if ($whereStr === "") {
-					$whereStr .= " WHERE {$where["value"]}";
-				} else {
-					$whereStr .= " {$where["key"]} {$where["value"]}";
-				}
-			}
-			return $whereStr;
-		}
-		return "";
-	}
-
+	
 	function getRows() {
+		if ($this->_select === null) {
+			$this->select();
+		}
+
 		$result = [];
 		$joinStr = "";
 		$whereStr = $this->whereStmt();
 
 		if (!empty($this->_joins)) {
-
 			foreach( $this->_joins as $join ) {
 				$joinStr .= " {$join["join"]} {$join["value"]}";
 			}
 		}
 
 		$this->_select .= " {$joinStr} {$whereStr}";
-
 		$stmt = $this->_conn->prepare($this->_select);
 
 		//adds value
@@ -202,7 +180,7 @@ Class Model {
 			}
 			$stmt->bind_param(implode("", $params), ...$this->_values);
 		}
-		
+
 		$stmt->execute();
 		$queryRes = $stmt->get_result();
 
@@ -211,6 +189,30 @@ Class Model {
 		}
 
 		return $result;
+	}
+
+	function getOne() {
+		$rows = $this->getRows();
+		if (empty($rows)) {
+			return array();
+		}
+
+		return $rows[0];
+	}
+
+	function whereStmt() {
+		if (!empty($this->_where)) {
+			$whereStr = "";
+			foreach( $this->_where as $where ) {
+				if ($whereStr === "") {
+					$whereStr .= " WHERE {$where["value"]}";
+				} else {
+					$whereStr .= " {$where["key"]} {$where["value"]}";
+				}
+			}
+			return $whereStr;
+		}
+		return "";
 	}
 
 	function getType($value) {

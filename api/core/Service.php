@@ -29,7 +29,7 @@
 			$this->params = $params;
 			$this->get = $get;
 			foreach($args as $arg) {
-				$this->{$arg->showTableName()} = $arg;
+				$this->{$arg->showTableName()."Model"} = $arg;
 			}
 			$this->run();
 		}
