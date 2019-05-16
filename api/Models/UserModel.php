@@ -1,7 +1,7 @@
 <?php 
     require API_MODEL;
 
-    class UserModel extends Model {
+    class UserModels extends Model {
         function __construct() {
             parent::__construct();
         }
