@@ -1,6 +1,7 @@
 <?php 
 	$routes = array(
-		"sample" => "GET SampleController.get"
+		"api/user/add" => "GET UserService/AddUser",
+		"api/user/edit/:id/:user" => "GET UserService/EditUser"
 	);
 
 ?>
