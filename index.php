@@ -2,6 +2,7 @@
 	
 	define("SITE_ROOT", getcwd());
 	define("API_SERVICE", SITE_ROOT."/api/core/Service.php");
+
 	require './api/routes.php';
 
 	function url(){
@@ -21,10 +22,12 @@
 	}
 
 	$apiDir = 'index.php/api';
+	$publicDir = 'index.php/public';
+
+	$requestType = $_SERVER["REQUEST_METHOD"];
+	$pathInfo = substr($_SERVER["PATH_INFO"], 1);
 
 	if (strpos(url(), $apiDir)) {
-		$requestType = $_SERVER["REQUEST_METHOD"];
-		$pathInfo = substr($_SERVER["PATH_INFO"], 1);
 		$GET = array();
 		$body = array();
 		$params = array();
@@ -45,8 +48,8 @@
 				$pathExplode = array_filter(array_values(explode($path, $pathInfo)));
 				$requestMethod = explode(" ", $value);
 				$pathRoute = array();
+
 				if ($requestType === $requestMethod[0]) {
-					
 					if (count($pathExplode) >= 1) {
 						$pathExplode = array_values(array_filter(explode($path, $pathInfo)));
 						$pathExplode = array_values(array_filter(explode("/", $pathExplode[0])));
@@ -72,7 +75,20 @@
 		header('Content-Type: application/json');
 		http_response_code(500);
 		echo json_encode(array("message" => "NO API FOUND"));
-	} else {
+	} 
+	else if (strpos(url(), $publicDir)) {
+		$file = SITE_ROOT."/".$pathInfo;
+		if (!file_exists($file)) {
+			http_response_code(500);
+			$response = array(
+				"message" => "Web file not found...!"
+			);
+			echo json_encode($response);
+		} else {
+			require $file;
+		}
+	}
+	else {
 		header('Content-Type: application/json');
 		$uri = $_SERVER['REQUEST_URI'];
 		$response = array(
