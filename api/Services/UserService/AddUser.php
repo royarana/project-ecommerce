@@ -11,7 +11,7 @@
         }
 
         function run() {
-          echo $this->TestModel->showTableName();
+           $models = $this->TestModel->get();
         }
     }
     
