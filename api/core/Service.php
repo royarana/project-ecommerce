@@ -1,5 +1,6 @@
 <?php 
 
+
 	interface Api {
 		public function sanitazion();
 		public function middleware();
@@ -7,8 +8,9 @@
 	}
 
 	require_once SITE_ROOT."/api/Libraries/GUMP-master/gump.class.php";
-	
-	class Controller implements Api {
+	require_once SITE_ROOT."/api/Libraries/Response.php";
+
+	class Controller extends Response implements Api {
 		public $data;
 		public $body;
 		public $params;
@@ -40,19 +42,17 @@
 			$this->run();
 		}
 
-		function response($data, $message, $response = 202) {
-			header('Content-Type: application/json');
-			http_response_code($response);
-			$response = array(
-				"data" => $data,
-				"message" => $message
-			);
-			echo json_encode($response);
-			exit;
-		}
-
-		function validationErr($data) {
-			$this->response($data, "Validation Error...!", 400);
+		function validationErr($rules, $data = array()) {
+			$gump = $this->gump;
+			$this->body = $gump->sanitize($this->body);
+			$data = (empty($data)) ? $this->body : $gump->sanitize($data());
+			$data = $gump->sanitize($data);
+            $gump->validation_rules($rules);
+            $validated_data = $gump->run($data);
+            
+            if($validated_data === false) {
+                $this->response($gump->get_errors_array(), "Validation Error...!", 400);
+            }
 		}
 	}
 ?>
