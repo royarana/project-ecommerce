@@ -1,8 +1,18 @@
 <?php
+define("MYSQL_CONN_ERROR", "Unable to connect to database."); 
 
+// Ensure reporting is setup correctly 
+mysqli_report(MYSQLI_REPORT_STRICT); 
 require SITE_ROOT.'/api/core/db.php';
+require_once SITE_ROOT."/api/Libraries/Response.php";
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
+    echo "<b>Custom error:</b> [$errno] $errstr<br>";
+    echo " Error on line $errline in $errfile<br>";
+}
 
-Class Model {
+set_error_handler("myErrorHandler");
+
+Class Model extends Response {
 	private $_columns = [];
 	private $_conn;
 	private $_connString;
@@ -23,6 +33,10 @@ Class Model {
 		return $this->_table;
 	}
 
+	function mysqlError($message) {
+		$this->response(array("MY_SQL_ERROR" => $message), "You have Error in MYSQL", 500);
+	}
+
 	function create($data) {
 		$params = [];
 		$columns = [];
@@ -38,11 +52,16 @@ Class Model {
 
 		$colStmt = implode(", ", $columns);
 		$valStmt = implode(", ", $qs);
-
 		$insertStmt = "INSERT INTO {$this->_table} ({$colStmt}) values ({$valStmt})";
 		$stmt = $this->_conn->prepare($insertStmt);
 		$stmt->bind_param(implode("", $params), ...$values);
 		$stmt->execute();
+		$insertId = $stmt->insert_id;
+
+		if ($insertId === 0) {
+			$this->mysqlError($this->_conn->error);
+		}
+		
 		return $stmt->insert_id;
 	}
 
@@ -80,15 +99,19 @@ Class Model {
 
 	function _setConnection() {
 		$conn = $this->_connString;
-		$this->_conn = new mysqli(
-			$conn["localhost"],
-			$conn["user"],
-			$conn["password"],
-			$conn["db"]
-		);
+		try {
+			$this->_conn = new mysqli(
+				$conn["localhost"],
+				$conn["user"],
+				$conn["password"],
+				$conn["db"]
+			);
 
-		if ($this->_conn->connect_error) {
-			die("MYSQL ERROR {mysqli_error()}");
+			if ($this->_conn->connect_error) {
+				die("MYSQL ERROR {mysqli_error()}");
+			}
+		} catch (Exception $e) {
+			die($e->getMessage());
 		}
 	}
 
