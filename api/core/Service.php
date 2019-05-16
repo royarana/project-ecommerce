@@ -52,7 +52,18 @@
             
             if($validated_data === false) {
                 $this->response($gump->get_errors_array(), "Validation Error...!", 400);
-            }
+			}
+			$this->setBody($rules);
+		}
+
+		function setBody($rules) {
+			$body = array();
+
+			foreach($rules as $index => $value) {
+				$body[$index] = $value;
+			}
+
+			$this->body = $body;
 		}
 	}
 ?>
