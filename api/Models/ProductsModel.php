@@ -1,0 +1,11 @@
+<?php 
+    require API_MODEL;
+
+    class UserModels extends Model {
+        function __construct() {
+            parent::__construct();
+        }
+    }
+    
+    $UserModel = new UserModel();
+?>
