@@ -62,8 +62,8 @@
 
 <!-- CARD -->
 
-<div class="container d-flex flex-row flex-wrap mb-5">
-	<div class="card w-25 mt-5 carding ml-4">
+<div class="container d-flex flex-wrap justify-content-between mb-5">
+	<div class="card mt-5 carding">
 		<img src="images/shoe18.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card ssstitle</h5>
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe19.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -82,7 +82,7 @@
 	</div>
 
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe20.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -92,7 +92,7 @@
 	</div>
 
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe21.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -101,7 +101,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe22.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -110,7 +110,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe23.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -119,7 +119,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card mt-5 carding">
 		<img src="images/shoe24.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -128,7 +128,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ">
+	<div class="card mt-5 carding ">
 		<img src="images/shoe25.jpg" class="card-img-top" alt="..." >
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
