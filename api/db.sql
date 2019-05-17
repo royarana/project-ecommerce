@@ -20,5 +20,7 @@ create table products (
     description varchar(50) not null unique,
     barcode varchar(50) not null unique,
     date_created datetime not null default now(),
-    date_updated datetime not null default now() on update CURRENT_TIMESTAMP
+    date_updated datetime not null default now() on update CURRENT_TIMESTAMP,
+    picture text not null,
+    inventory decimal(19,4) not null default 0
 );

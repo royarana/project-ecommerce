@@ -18,7 +18,7 @@ Class Model extends Response {
 
 	function __construct() {
 		global $CONFIG;
-		$this->_table = str_replace("Model", "" , get_class($this));
+		$this->_table = str_replace("Model", "s" , get_class($this));
 		$this->_connString = $CONFIG;
 		$this->_setConnection();
 	}

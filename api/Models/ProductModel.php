@@ -1,11 +1,11 @@
 <?php 
     require API_MODEL;
 
-    class UserModels extends Model {
+    class ProductModel extends Model {
         function __construct() {
             parent::__construct();
         }
     }
     
-    $UserModel = new UserModel();
+    $ProductModel = new ProductModel();
 ?>
