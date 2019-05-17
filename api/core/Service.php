@@ -45,7 +45,7 @@
 		function validationErr($rules, $data = array()) {
 			$gump = $this->gump;
 			$this->body = $gump->sanitize($this->body);
-			$data = (empty($data)) ? $this->body : $gump->sanitize($data());
+			$data = (empty($data)) ? $this->body : $gump->sanitize($data);
 			$data = $gump->sanitize($data);
             $gump->validation_rules($rules);
             $validated_data = $gump->run($data);

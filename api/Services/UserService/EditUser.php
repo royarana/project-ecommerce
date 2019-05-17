@@ -23,8 +23,8 @@
         }
 
         function run() {
-            $this->UserModel->where("id", $this->params["id"]);
-            $models = $this->UserModel->update($this->body);
+            $this->UsersModel->where("id", $this->params["id"]);
+            $models = $this->UsersModel->update($this->body);
             $this->response(
                 $models,
                 "User Updated Successfully...!",

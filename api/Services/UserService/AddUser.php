@@ -23,7 +23,7 @@
         }
 
         function run() {
-            $models = $this->UserModel->create($this->body);
+            $models = $this->UsersModel->create($this->body);
             $this->response(
                 $models,
                 "User Created Successfully...!",

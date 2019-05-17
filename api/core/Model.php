@@ -10,15 +10,16 @@ Class Model extends Response {
 	private $_columns = [];
 	private $_conn;
 	private $_connString;
-	public $_table;
+	public  $_table;
 	private $_where = [];
 	private $_values = [];
 	private $_joins = [];
 	private $_select = null;
+	private $_limit = "";
 
 	function __construct() {
 		global $CONFIG;
-		$this->_table = str_replace("Model", "s" , get_class($this));
+		$this->_table = str_replace("Model", "" , get_class($this));
 		$this->_connString = $CONFIG;
 		$this->_setConnection();
 	}
@@ -29,6 +30,11 @@ Class Model extends Response {
 
 	function mysqlError($message) {
 		$this->response(array("MY_SQL_ERROR" => $message), "You have Error in MYSQL", 500);
+	}
+
+	function page($page, $number = 10) {
+		$OFFSET = 10 * ($page - 1);
+		$this->_limit = "LIMIT {$number} OFFSET {$OFFSET}";
 	}
 
 	function create($data) {
@@ -95,6 +101,7 @@ Class Model extends Response {
 		 $this->_values = [];
 		 $this->_joins = [];
 		 $this->_select = null;
+		 $this->_limit = "";
 	}
 
 	function _setConnection() {
@@ -135,6 +142,11 @@ Class Model extends Response {
 	function where($col, $value, $operator = "=") {
 		$this->_where[] = array( "key" => "AND" , "value" => "{$col} ${operator} ?" );
 		$this->_values[] = $value;
+	}
+
+	function search($col, $value) {
+		$this->_where[] = array( "key" => "AND" , "value" => "{$col} LIKE ?" );
+		$this->_values[] = "%{$value}%";
 	}
 
 	function orWhere($col, $value, $operator = "=") {
@@ -183,7 +195,7 @@ Class Model extends Response {
 			}
 		}
 
-		$this->_select .= " {$joinStr} {$whereStr}";
+		$this->_select .= " {$joinStr} {$whereStr} {$this->_limit}";
 		$stmt = $this->_conn->prepare($this->_select);
 
 		//adds value
