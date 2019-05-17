@@ -13,8 +13,8 @@
 				<div class="row">
 					<img src = "./images/square_logo.svg">
 					<div class="container d-flex flex-column justify-content-start">
-				   		<a class="navbar-brand" href="#">ROY Inc.</a>
-					    <p class="navbar-brand" href="#">ECommerce</p>  
+				   		<a class="navbar-brand" href="#">JRO Inc.</a>
+					    <p class="navbar-brand" href="#">Shoe Shop</p>  
 				    </div>
 				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				    <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,7 @@
   		
 	</nav>
 <!-- carousel -->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide w-50" data-ride="carousel" >
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -55,13 +55,13 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./images/home.svg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel4.jpg" class="d-block w-100" alt="..." width="300" height="400">
     </div>
     <div class="carousel-item">
-      <img src="./images/home.svg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel3.jpg" class="d-block w-100" alt="..." width="300" height="400">
     </div>
     <div class="carousel-item">
-      <img src="./images/home.svg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel2.jpg" class="d-block w-100" alt="..." width="300" height="400">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -79,7 +79,7 @@
 <div class="container-2 d-flex flex-column justify-content-end mb-5">
   <div>
 	<nav class="navbar navbar-light bg-light">
-	  <a class="navbar-brand">Welcome to JARO INC.</a>
+	  <a class="navbar-brand">Welcome to JRO Inc.</a>
 	  <form class="form-inline">
 	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -91,9 +91,9 @@
 
 <!-- CARD -->
 
-<div class="container d-flex flex-row flex-wrap">
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+<div class="container d-flex flex-row flex-wrap mb-5">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe18.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card ssstitle</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -101,8 +101,8 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe19.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -111,8 +111,8 @@
 	</div>
 
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe20.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -121,8 +121,8 @@
 	</div>
 
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe21.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -130,8 +130,8 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe22.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -139,8 +139,8 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe23.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -148,8 +148,8 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe24.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -157,8 +157,8 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<img src="images/shoe25.jpg" class="card-img-top" alt="..." >
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -166,40 +166,35 @@
 		</div>
 	</div>
 
-	<div id="carding" class="card w-25 mt-5 ml-5">
-		<img src="./images/home.svg" class="card-img-top" alt="...">
+	<div class="card w-25 mt-5 carding">
+		<h5 class="card-title">Card title</h5>
+		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		<img src="images/shoe26.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
-			<h5 class="card-title">Card title</h5>
-			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 		  	<a href="#" class="btn btn-primary">Go somewhere</a>
 		</div>
 	</div>
-
 </div>
 <!-- END of CARD -->
 
-<footer>
-	<div class="container3">
-		<div>
-			<p>ABOUT JARO INC.</p>
+<footer class = "d-flex flex-wrap justify-content-center">
+	<div class="container3 d-flex flex-wrap justify-content-center">
+		<div class="col-lg-3">
+			<h4>ABOUT JARO INC.</h4>
 			<p>lorem ipsudom doremi</p>
 			
 		</div>
-		<div>
-			<p>RETAIL & WORKSHOP</p>
+		<div class="col-lg-3">
+			<h4>RETAIL & WORKSHOP</h4>
 			<p>lorem ipsudom doremi</p>
 			
 		</div>
-		<div>
-			<p>GET SOCIAL WITH US!</p>	
-		</div>
+		<div class="col-lg-3">
+			<h4>GET SOCIAL WITH US!</h4>
+
+
+		</div> 
 	</div>
-
-	<div class="posi">
-		<p style="text-align:center;">copyrights</p>
-	</div>
-
-
 </footer>
 
 
