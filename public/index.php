@@ -13,7 +13,7 @@
 				<div class="row">
 					<img src = "./images/square_logo.svg">
 					<div class="container d-flex flex-column justify-content-start">
-				   		<a class="navbar-brand" href="#">JARO INC.</a>
+				   		<a class="navbar-brand" href="#">ROY Inc.</a>
 					    <p class="navbar-brand" href="#">ECommerce</p>  
 				    </div>
 				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
