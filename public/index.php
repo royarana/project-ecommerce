@@ -7,7 +7,7 @@
 </head>
 <body>
 <!-- navbar main -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
 			<div>
 				<div class="row">
@@ -42,9 +42,7 @@
 			</div>
 			  </div>
 			</div>
-		</div>
-	</div>
-  		
+		</div>	
 	</nav>
 <!-- carousel -->
 <div id="carouselExampleIndicators" class="carousel slide w-50" data-ride="carousel" >
@@ -88,11 +86,21 @@
   </div>
 </div>
 
+<!-- FEATURE -->
+
+<div class="card bg-dark text-white mb-5">
+  <img src="images/carousel4.jpg" class="card-img" alt="...">
+  <div class="card-img-overlay">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text">Last updated 3 mins ago</p>
+  </div>
+</div>
 
 <!-- CARD -->
 
 <div class="container d-flex flex-row flex-wrap mb-5">
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe18.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card ssstitle</h5>
@@ -101,7 +109,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe19.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -111,7 +119,7 @@
 	</div>
 
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe20.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -121,7 +129,7 @@
 	</div>
 
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe21.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -130,7 +138,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe22.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -139,7 +147,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe23.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -148,7 +156,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe24.jpg" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -157,7 +165,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
+	<div class="card w-25 mt-5 carding ml-4">
 		<img src="images/shoe25.jpg" class="card-img-top" alt="..." >
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -166,14 +174,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding">
-		<h5 class="card-title">Card title</h5>
-		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		<img src="images/shoe26.jpg" class="card-img-top" alt="...">
-		<div class="card-body">
-		  	<a href="#" class="btn btn-primary">Go somewhere</a>
-		</div>
-	</div>
+	
 </div>
 <!-- END of CARD -->
 
@@ -196,6 +197,10 @@
 		</div> 
 	</div>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 </body>
