@@ -20,11 +20,12 @@ body{
 .container-2{
 	margin-top: 50px;
 }
+
 #carouselExampleIndicators{
 	margin-top: 50px;
+	padding-left: 5%;
+	padding-right: 5%;
 }
-
-	
 
 .container3 {
 	background-color: yellow;
@@ -53,5 +54,6 @@ footer .container3 {
 	height: 250px;
 }
 
-
-
+.carousel-button {
+	background-color: blue;
+}

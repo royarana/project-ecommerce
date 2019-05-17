@@ -1,51 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="style-homepage.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-<!-- navbar main -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="container">
-			<div>
-				<div class="row">
-					<img src = "./images/square_logo.svg">
-					<div class="container d-flex flex-column justify-content-start">
-				   		<a class="navbar-brand" href="#">JRO Inc.</a>
-					    <p class="navbar-brand" href="#">Shoe Shop</p>  
-				    </div>
-				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				    <span class="navbar-toggler-icon"></span>
-				    </button>
-			    </div>
-		  	</div>
-		  	<div class=" d-flex justify-content-end">
-		  		<div>
-			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			    <div class="navbar-nav" id="nav-my-account" >
-			      <a id="a1" class="nav-item nav-link active" href="#">MY ACCOUNT </a>
-			      <a id="a1" class="nav-item nav-link" href="#">CHECKOUT</a>
-			      <a id="a1"class="nav-item nav-link" href="#">LOGIN</a>
-			      <a id="a1"class="nav-item nav-link" href="#">REGISTER</a>
-			    </div>
-			  </div>
 
-			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			    <div class="navbar-nav" id="nav-home">
-			      <a class="nav-item nav-link active" href="#">HOME</a>
-			      <a class="nav-item nav-link" href="#">PRODUCTS</a>
-			      <a class="nav-item nav-link" href="#">BLOGS</a>
-			      <a class="nav-item nav-link" href="#">CONTACT</a>
-			    </div>
-			</div>
-			  </div>
-			</div>
-		</div>	
-	</nav>
+<!-- navbar main -->
+	<?php 
+		include './layouts/navbar.php';
+	?>
 <!-- carousel -->
-<div id="carouselExampleIndicators" class="carousel slide w-50" data-ride="carousel" >
+<div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel" >
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -62,14 +21,18 @@
       <img src="images/carousel2.jpg" class="d-block w-100" alt="..." width="300" height="400">
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		  	<div class = "carousel-button w-25 pt-1">
+			  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+		  	</div>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		  	<div class = "carousel-button w-25 pt-1">
+			    <span class="carousel-control-next-icon carousel-button w-25 " aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			</div>
+		  </a>
 </div>
 
 <!--end carousel -->
@@ -165,7 +128,7 @@
 		</div>
 	</div>
 
-	<div class="card w-25 mt-5 carding ml-4">
+	<div class="card w-25 mt-5 carding ">
 		<img src="images/shoe25.jpg" class="card-img-top" alt="..." >
 		<div class="card-body">
 			<h5 class="card-title">Card title</h5>
@@ -176,32 +139,6 @@
 
 	
 </div>
-<!-- END of CARD -->
-
-<footer class = "d-flex flex-wrap justify-content-center">
-	<div class="container3 d-flex flex-wrap justify-content-center">
-		<div class="col-lg-3">
-			<h4>ABOUT JARO INC.</h4>
-			<p>lorem ipsudom doremi</p>
-			
-		</div>
-		<div class="col-lg-3">
-			<h4>RETAIL & WORKSHOP</h4>
-			<p>lorem ipsudom doremi</p>
-			
-		</div>
-		<div class="col-lg-3">
-			<h4>GET SOCIAL WITH US!</h4>
-
-
-		</div> 
-	</div>
-</footer>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-</body>
-</html>
+<?php 
+	include './layouts/footer.php';
+?>
