@@ -44,6 +44,8 @@ footer .container3 {
 
 .carding {
 	padding: 5px 5px 5px 5px;
+	flex: 1 0 21%; /* explanation below */
+ 	margin: 5px;
 }
 
 .carding img {
@@ -56,9 +58,4 @@ footer .container3 {
 
 .carousel-button {
 	background-color: blue;
-}
-
-.container .carding {
-  flex: 1 0 21%; /* explanation below */
-  margin: 5px;
 }

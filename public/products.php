@@ -21,11 +21,11 @@
 
 <!-- CARD -->
 
-<div class = "row">
-	<div class="col-lg-3">
+<div class="row">
+	<div class = "col-lg-2 mt-5">
 		Items
 	</div>
-	<div class="col-lg-9 container d-flex flex-wrap justify-content-between mb-5">
+	<div class = "d-flex flex-wrap justify-content-between mb-5 col-lg-10">
 		<div class="card mt-5 carding">
 			<img src="images/shoe18.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
@@ -98,7 +98,7 @@
 				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 			  	<a href="#" class="btn btn-primary">Go somewhere</a>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
 <?php 
