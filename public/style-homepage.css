@@ -1,5 +1,10 @@
+body{
+	background-image: url(images/backround1.jpg);
+}
 
-
+.navbar {
+	background-image: url(images/backround3.jpg);
+}
 
 #a1 {
 	font-size: 10px;
@@ -8,17 +13,19 @@
 
 .container{
 	margin-top: -50px;
+
 	
 }
 
 .container-2{
 	margin-top: 50px;
 }
+
 #carouselExampleIndicators{
 	margin-top: 50px;
+	padding-left: 5%;
+	padding-right: 5%;
 }
-
-	
 
 .container3 {
 	background-color: yellow;
@@ -37,6 +44,8 @@ footer .container3 {
 
 .carding {
 	padding: 5px 5px 5px 5px;
+	flex: 1 0 21%; /* explanation below */
+ 	margin: 5px;
 }
 
 .carding img {
@@ -47,5 +56,6 @@ footer .container3 {
 	height: 250px;
 }
 
-
-
+.carousel-button {
+	background-color: blue;
+}
