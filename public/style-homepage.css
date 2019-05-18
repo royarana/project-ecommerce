@@ -13,8 +13,6 @@ body{
 
 .container{
 	margin-top: -50px;
-
-	
 }
 
 .container-2{
@@ -25,17 +23,22 @@ body{
 	margin-top: 50px;
 	padding-left: 5%;
 	padding-right: 5%;
+	
 }
 
 .container3 {
 	background-color: yellow;
 	margin-top: -70px;
 	margin-bottom: 40px;
+	border: 2px solid gray;
+  	border-top-right-radius: 25px;
+  	border-top-left-radius: 25px;
 }
 
 footer{
 	background-color: blue;
 	margin-top: 10%;
+
 }
 
 footer .container3 {
@@ -58,4 +61,8 @@ footer .container3 {
 
 .carousel-button {
 	background-color: blue;
+}
+
+.container-product {
+	background-image: url(./images/backround4.jpg);
 }

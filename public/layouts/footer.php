@@ -1,19 +1,19 @@
 <!-- END of CARD -->
 
 <footer class = "d-flex flex-wrap justify-content-center">
-	<div class="container3 d-flex flex-wrap justify-content-center">
+	<div class="container3 d-flex flex-wrap justify-content-center ">
 		<div class="col-lg-3">
-			<h4>ABOUT JARO INC.</h4>
+			<h6>ABOUT JARO INC.</h6>
 			<p>lorem ipsudom doremi</p>
 			
 		</div>
 		<div class="col-lg-3">
-			<h4>RETAIL & WORKSHOP</h4>
+			<h6>RETAIL & WORKSHOP</h6>
 			<p>lorem ipsudom doremi</p>
 			
 		</div>
 		<div class="col-lg-3">
-			<h4>GET SOCIAL WITH US!</h4>
+			<h6>GET SOCIAL WITH US!</h6>
 
 
 		</div> 

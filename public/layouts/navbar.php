@@ -35,8 +35,6 @@
 			    <div class="navbar-nav" id="nav-home">
 			      <a class="nav-item nav-link active" href="#">HOME</a>
 			      <a class="nav-item nav-link" href="#">PRODUCTS</a>
-			      <a class="nav-item nav-link" href="#">BLOGS</a>
-			      <a class="nav-item nav-link" href="#">CONTACT</a>
 			    </div>
 			</div>
 			  </div>
