@@ -24,3 +24,11 @@ create table products (
     picture text not null,
     inventory decimal(19,4) not null default 0
 );
+
+create table featured (
+    id int(11) auto_increment primary key,
+    product_id int(11),
+    status BOOLEAN default true,
+    date_created datetime not null default now(),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);

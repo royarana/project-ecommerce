@@ -12,8 +12,8 @@
 
         function sanitazion() {
             $rules = array(
-                'full_name'    => 'required|alpha_numeric|max_len,100|min_len,6|max_len,100',
-                'password'    => 'required|max_len,100|min_len,6|max_len,50',
+                'full_name'    => 'required|alpha_numeric|max_len,100|min_len,6',
+                'password'    => 'required|max_len,100|min_len,6',
                 'gender' => 'required|max_len,1|contains,M F',
                 'birthday' => 'required|date',
                 'email' => 'required|valid_email'

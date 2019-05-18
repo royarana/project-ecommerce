@@ -1,6 +1,7 @@
 <?php 
-
-
+	define('ACTIVE', 1);
+	define('INACTIVE', 0);
+	
 	interface Api {
 		public function sanitazion();
 		public function middleware();

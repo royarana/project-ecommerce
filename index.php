@@ -28,7 +28,7 @@
 
 	$requestType = $_SERVER["REQUEST_METHOD"];
 	$pathInfo = substr($_SERVER["PATH_INFO"], 1);
-
+	
 	if (strpos(url(), $apiDir)) {
 		$GET = array();
 		$body = array();
@@ -45,12 +45,11 @@
 		foreach($routes as $key => $value) {
 			$route = explode("/:", $key);
 			$path = $route[0];
-
 			if (strpos($pathInfo, $path) !== false) {
 				$pathExplode = array_filter(array_values(explode($path, $pathInfo)));
 				$requestMethod = explode(" ", $value);
 				$pathRoute = array();
-
+				
 				if ($requestType === $requestMethod[0]) {
 					if (count($pathExplode) >= 1) {
 						$pathExplode = array_values(array_filter(explode($path, $pathInfo)));
@@ -73,7 +72,7 @@
 				}
 			}
 		}
-
+		exit;
 		header('Content-Type: application/json');
 		http_response_code(500);
 		echo json_encode(array("message" => "NO API FOUND"));
