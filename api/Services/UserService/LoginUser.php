@@ -26,13 +26,23 @@
 
         function run() {
             $this->UsersModel->where('email', $this->body["email"]);
-            $this->UsersModel->where('password', sha($this->body["password"]));
-            $models = $this->UsersModel->create($this->body);
-            $this->response(
-                $models,
-                "User Created Successfully...!",
-                201
-            );
+            $this->UsersModel->where('password', $this->body["password"]);
+            $this->UsersModel->select('id, full_name, birthday, gender, email');
+
+            $models = $this->UsersModel->getOne($this->body);
+            if (!empty($models)) {
+                $this->response(
+                    $models,
+                    "User Credentials Login Successfully...!",
+                    201
+                );
+            } else {
+                $this->response(
+                    array(),
+                    "User Crendentials Incorrect...!",
+                    400
+                );
+            }
         }
     }
     

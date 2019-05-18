@@ -164,7 +164,7 @@ Class Model extends Response {
 
 	function select($cols = "*") {
 		if ($cols !== "") {
-			$this->_columns = explode(", ", $cols);
+			$this->_columns = explode(",", $cols);
 		} else {
 			$this->_setColumns();
 		}
