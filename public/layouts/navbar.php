@@ -8,7 +8,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
-			<div>
+			<div id="navbar-search">
 				<div class="row">
 					<img src = "./images/square_logo.svg">
 					<div class="container d-flex flex-column justify-content-start">
