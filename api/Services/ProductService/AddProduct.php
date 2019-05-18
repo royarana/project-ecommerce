@@ -12,6 +12,8 @@
         }
 
         function sanitazion() {
+            $this->body = array_merge($_FILES, $_POST);
+            
             $rules = array(
                 'description'    => 'required|max_len,100|min_len,6',
                 'barcode'    => 'required|max_len,100|min_len,6',

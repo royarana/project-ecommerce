@@ -67,9 +67,6 @@
 					
 					if (count($pathRoute) === count($pathExplode)) {
 						require "./api/Services/{$requestMethod[1]}.php";
-						if(!empty($_FILES)) {
-							$body = array_merge($_FILES, $_POST);
-						}
 						
 						$requestedController = new $controller($body, $params, $GET);
 						exit;
