@@ -12,7 +12,8 @@
 
         function run() {
             $this->ProductsModel->join('featured', 'featured.product_id', 'products.id');
-            $this->ProductsModel->where('status', ACTIVE);
+            $this->ProductsModel->where('featured.status', ACTIVE);
+            $this->ProductsModel->where('products.status', ACTIVE);
 
             $models = $this->ProductsModel->getRows();
             $this->response(

@@ -22,8 +22,9 @@
         }
 
         function run() {
+            $this->ProductsModel->where('status', ACTIVE);
             $this->ProductsModel->page($this->params["page"]);
-            
+           
             if (isset($this->params['search'])) {
                 $this->ProductsModel->search('description', $this->params["search"]);
             }
