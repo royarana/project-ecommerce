@@ -1,0 +1,35 @@
+<?php
+
+    require API_SERVICE;
+    require SERVICE_FOLDER."UserService/CheckLogin.php";
+
+	class CheckToken extends Controller {
+        
+		function __construct($body, $params, $get) {
+            parent::__construct($body, $params, $get);
+        }
+
+        function sanitazion() {
+            $rules = array(
+                'token'    => 'required',
+                'id'    => 'required'
+            );
+           
+            $this->validationErr($rules);
+        }
+
+        function middleware() {
+            CheckLogin($this->body["token"], $this->body["id"]);
+        }
+
+        function run() {
+            $this->response(
+                array(),
+                "User Token is Active",
+                200
+            );
+        }
+    }
+    
+    $controller = "CheckToken";
+?>

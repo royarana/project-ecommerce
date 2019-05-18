@@ -2,6 +2,7 @@
 	$routes = array(
 		"api/user" => "POST UserService/AddUser",
 		"api/user/login" => "POST UserService/LoginUser",
+		"api/user/token" => "POST UserService/CheckToken",
 		"api/user/:id" => "PUT UserService/EditUser",
 		"api/product" => "POST ProductService/AddProduct",
 		"api/product/featured" => "GET ProductService/Featured",
