@@ -11,6 +11,7 @@
 		"api/product/featured/remove" => "PUT ProductService/RemoveFeatured",
 		"api/product/featured" => "GET ProductService/Featured",
 		"api/product/list/:page" => "GET ProductService/GetProduct",
-		"api/product/list/:page/:search" => "GET ProductService/GetProduct"
+		"api/product/list/:page/:search" => "GET ProductService/GetProduct",
+		"api/cart" => "POST CartService/AddItem"
 	);
 ?>

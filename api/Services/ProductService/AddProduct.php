@@ -2,10 +2,11 @@
 
     require API_SERVICE;
     require MODELS."ProductModel.php";
-    
+    require_once SERVICE_FOLDER."UserService/CheckLogin.php";
+
 	class AddProduct extends Controller {
         
-		function __construct($body, $params, $get) {
+		function __construct($body = array(), $params = array(), $get = array()) {
             global $ProductModel;
             parent::__construct($body, $params, $get, $ProductModel);
         }
@@ -14,20 +15,52 @@
             $rules = array(
                 'description'    => 'required|max_len,100|min_len,6',
                 'barcode'    => 'required|max_len,100|min_len,6',
-                'picture' => 'required_file|extension,png;jpg'
+                'picture' => 'required_file|extension,png;jpg;jpeg',
+                'price' => 'required|numeric',
+                'token' => 'required'
             );
-
+            
             $this->validationErr($rules);
         }
 
+        function middleware() {
+            checkLogin($this->body['token']);
+        }
+
         function run() {
+            $create = $this->body;
+            unset($create["token"]);
+
+            $type = end(explode(".", $create["picture"]['name']));
+            $file_name = sha1($create["picture"]['name'].uniqid()).".".$type;
+            $file_size = $create["picture"]['size'];
+            $file_tmp = $create["picture"]['tmp_name'];
+            $file_type = $_FILES['picture']['type'];
+            $directory = SITE_ROOT."/public/uploads/".$file_name;
+            $create["picture"] = $directory;
             
-            $models = $this->ProductsModel->getRows();
-            $this->response(
-                $models,
-                "Products Added Successfully...!",
-                201
-            );
+            if($file_size > 2097152) {
+                $this->response(
+                    array(),
+                    "File Size must be 2mb or below...!",
+                    500
+                );
+            }
+
+            if (move_uploaded_file($file_tmp, $directory)) {
+                $models = $this->ProductsModel->create($create);
+                $this->response(
+                    $models,
+                    "Products Added Successfully...!",
+                    201
+                );
+            } else {
+                $this->response(
+                    array(),
+                    "File Unsuccessfully Uploaded",
+                    500
+                );
+            }
         }
     }
     
