@@ -11,15 +11,14 @@
 
         function sanitazion() {
             $rules = array(
-                'token'    => 'required',
-                'id'    => 'required'
+                'token'    => 'required'
             );
            
             $this->validationErr($rules);
         }
 
         function middleware() {
-            CheckLogin($this->body["token"], $this->body["id"]);
+            CheckLogin($this->body["token"]);
         }
 
         function run() {

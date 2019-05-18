@@ -169,8 +169,8 @@ Class Model extends Response {
 		}
 
 		$cols = implode(", ", $this->_columns);
-
-		$this->_select = "SELECT {$cols} FROM {$this->_table} ";
+		$tbl = strtolower($this->_table);
+		$this->_select = "SELECT {$cols} FROM {$tbl} ";
 	}
 
 	function get() {
@@ -239,6 +239,12 @@ Class Model extends Response {
 		$this->update(array(
 			"status" => INACTIVE
 		));
+	}
+
+	function getActive($id, $col = "id") {
+		$this->where($col, $id);
+		$this->where("status", ACTIVE);
+		return $this->getOne();
 	}
 
 	function active($id, $col = "id") {

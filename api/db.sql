@@ -28,10 +28,12 @@ create table products (
     id int(11) auto_increment primary key,
     description varchar(50) not null unique,
     barcode varchar(50) not null unique,
+    price decimal(19,4) not null default 0,
     date_created datetime not null default now(),
     date_updated datetime not null default now() on update CURRENT_TIMESTAMP,
     picture text not null,
-    inventory decimal(19,4) not null default 0
+    inventory decimal(19,4) not null default 0,
+    status BOOLEAN default true
 );
 
 create table featured (
@@ -40,4 +42,28 @@ create table featured (
     status BOOLEAN default true,
     date_created datetime not null default now(),
     FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+create table carts (
+    id int(11) auto_increment primary key,
+    user_id int(11),
+    total_price decimal(19,4),
+    address text not null,
+    date_created datetime not null default now(),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+create table cart_items (
+    id int(11) auto_increment primary key,
+    cart_id int(11) default null,
+    quantity int(11) not null,
+    product_id int(11),
+    price decimal(19,4),
+    description varchar(50) not null unique,
+    picture text not null,
+    barcode varchar(50) not null unique,
+    status BOOLEAN default true,
+    date_created datetime not null default now(),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (cart_id) REFERENCES carts(id)
 );
