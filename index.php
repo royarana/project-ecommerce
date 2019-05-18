@@ -4,6 +4,7 @@
 	define("API_SERVICE", SITE_ROOT."/api/core/Service.php");
 	define("API_MODEL", SITE_ROOT."/api/core/Model.php");
 	define("MODELS", SITE_ROOT."/api/Models/");
+	define("SERVICE_FOLDER", SITE_ROOT."/api/Services/");
 
 	require './api/routes.php';
 

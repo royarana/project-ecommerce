@@ -4,7 +4,7 @@
     require MODELS."UserModel.php";
     require SERVICE_FOLDER."UserService/shaPassword.php";
 
-	class EditUser extends Controller {
+	class AddUser extends Controller {
         
 		function __construct($body, $params, $get) {
             global $UserModel;
@@ -13,10 +13,8 @@
 
         function sanitazion() {
             $rules = array(
-                'full_name'    => 'required|max_len,100|min_len,6|max_len,100',
-                'password'    => 'required|max_len,100|min_len,6|max_len,50',
-                'gender' => 'required|max_len,1|contains,M F',
-                'birthday' => 'required|date'
+                'email'    => 'required',
+                'password'    => 'required'
             );
            
             $this->validationErr($rules);
@@ -27,15 +25,16 @@
         }
 
         function run() {
-            $this->UsersModel->where("id", $this->params["id"]);
-            $models = $this->UsersModel->update($this->body);
+            $this->UsersModel->where('email', $this->body["email"]);
+            $this->UsersModel->where('password', sha($this->body["password"]));
+            $models = $this->UsersModel->create($this->body);
             $this->response(
                 $models,
-                "User Updated Successfully...!",
+                "User Created Successfully...!",
                 201
             );
         }
     }
     
-    $controller = "EditUser";
+    $controller = "AddUser";
 ?>

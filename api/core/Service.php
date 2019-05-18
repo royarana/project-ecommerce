@@ -38,8 +38,9 @@
 			foreach($args as $arg) {
 				$this->{$arg->showTableName()."Model"} = $arg;
 			}
-			$this->middleware();
+
 			$this->sanitazion();
+			$this->middleware();
 			$this->run();
 		}
 
@@ -61,7 +62,7 @@
 			$body = array();
 
 			foreach($rules as $index => $value) {
-				$body[$index] = $value;
+				$body[$index] = $this->body[$index];
 			}
 
 			$this->body = $body;

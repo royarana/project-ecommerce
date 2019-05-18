@@ -2,7 +2,8 @@
 
     require API_SERVICE;
     require MODELS."UserModel.php";
-    
+    require SERVICE_FOLDER."UserService/shaPassword.php";
+
 	class AddUser extends Controller {
         
 		function __construct($body, $params, $get) {
@@ -12,7 +13,7 @@
 
         function sanitazion() {
             $rules = array(
-                'full_name'    => 'required|alpha_numeric|max_len,100|min_len,6',
+                'full_name'    => 'required|max_len,100|min_len,6',
                 'password'    => 'required|max_len,100|min_len,6',
                 'gender' => 'required|max_len,1|contains,M F',
                 'birthday' => 'required|date',
@@ -20,6 +21,10 @@
             );
            
             $this->validationErr($rules);
+        }
+
+        function middleware() {
+            $this->body["password"] = shaPassword($this->body["password"]);
         }
 
         function run() {
