@@ -241,9 +241,9 @@ Class Model extends Response {
 		));
 	}
 
-	function getActive($id, $col = "id") {
+	function getActive($id, $col = "id", $active = ACTIVE) {
 		$this->where($col, $id);
-		$this->where("status", ACTIVE);
+		$this->where("status", $active);
 		return $this->getOne();
 	}
 

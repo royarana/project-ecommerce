@@ -5,6 +5,7 @@
 		"api/user/token" => "POST UserService/CheckToken",
 		"api/user/:id" => "PUT UserService/EditUser",
 		"api/product" => "POST ProductService/AddProduct",
+		"api/product/active" => "PUT ProductService/ActiveProduct",
 		"api/product/inactive" => "PUT ProductService/InactiveProduct",
 		"api/product/featured/add" => "PUT ProductService/AddFeatured",
 		"api/product/featured/remove" => "PUT ProductService/RemoveFeatured",
