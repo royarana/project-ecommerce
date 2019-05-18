@@ -3,6 +3,7 @@
     require API_SERVICE;
     require MODELS."UserModel.php";
     require SERVICE_FOLDER."UserService/shaPassword.php";
+    require SERVICE_FOLDER."UserService/CheckEmail.php";
 
 	class AddUser extends Controller {
         
@@ -25,6 +26,7 @@
 
         function middleware() {
             $this->body["password"] = shaPassword($this->body["password"]);
+            checkEmail($this->body["email"]);
         }
 
         function run() {
