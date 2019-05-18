@@ -1,10 +1,9 @@
 <?php
-define("MYSQL_CONN_ERROR", "Unable to connect to database."); 
-
 // Ensure reporting is setup correctly 
 mysqli_report(MYSQLI_REPORT_STRICT); 
 require SITE_ROOT.'/api/core/db.php';
 require_once SITE_ROOT."/api/Libraries/Response.php";
+require_once SITE_ROOT."/api/Libraries/constants.php";
 
 Class Model extends Response {
 	private $_columns = [];
@@ -17,9 +16,9 @@ Class Model extends Response {
 	private $_select = null;
 	private $_limit = "";
 
-	function __construct() {
+	function __construct($tableName = "") {
 		global $CONFIG;
-		$this->_table = str_replace("Model", "" , get_class($this));
+		$this->_table = ($tableName === "") ? str_replace("Model", "" , get_class($this)) : $tableName;
 		$this->_connString = $CONFIG;
 		$this->_setConnection();
 	}
@@ -235,6 +234,20 @@ Class Model extends Response {
 		return $rows[0];
 	}
 
+	function inactive($id, $col = "id") {
+		$this->where($col, $id);
+		$this->update(array(
+			"status" => INACTIVE
+		));
+	}
+
+	function active($id, $col = "id") {
+		$this->where($col, $id);
+		$this->update(array(
+			"status" => ACTIVE
+		));
+	}
+
 	function whereStmt() {
 		if (!empty($this->_where)) {
 			$whereStr = "";
@@ -253,43 +266,5 @@ Class Model extends Response {
 	function getType($value) {
 		return strtolower(gettype($value)[0]);
 	}
-} 
-
-/*
-class Test extends Model {
-	function __construct() {
-		parent::__construct("TEST");
-	}
 }
-$TestModel = new Test();
-*/
-
-/*
-For Where and Inner Joins
-	$TestModel->select("test_join.*");
-	$TestModel->where("test.id", 2, ">=");
-	$TestModel->orWhere("test.id", 1, "=");
-	$TestModel->join("join_test", "test.id", "join_test.id");
-	$TestModel->leftJoin("test_join", "test.id", "test_join.id");
-	$result = $TestModel->getRows();
-	print_r($result);
-*/
-
-/*
-For Created
-$id = $TestModel->create(array("username" => "sample_user"));
-print_r($id);
-
-*/
-
-/*
-
-For Updates
-$TestModel->where('id', 5);
-$res = $TestModel->update(
-	array(
-		"username" => "eticles"
-	)
-);
-*/
 ?>

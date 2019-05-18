@@ -2,13 +2,16 @@
 
     require API_SERVICE;
     require MODELS."UserModel.php";
-    require SERVICE_FOLDER."UserService/shaPassword.php";
+    require MODELS."UserTokenModel.php";
+    require SERVICE_FOLDER."UserService/ShaPassword.php";
+    require SERVICE_FOLDER."UserService/GenerateToken.php";
 
 	class AddUser extends Controller {
         
 		function __construct($body, $params, $get) {
             global $UserModel;
-            parent::__construct($body, $params, $get, $UserModel);
+            global $UserTokenModel;
+            parent::__construct($body, $params, $get, $UserModel, $UserTokenModel);
         }
 
         function sanitazion() {
@@ -31,10 +34,15 @@
 
             $models = $this->UsersModel->getOne($this->body);
             if (!empty($models)) {
+                
+                $username = $models["email"];
+                $models["token"] = GenerateToken($username);
+
+                $this->UserTokensModel->generateToken($models);
                 $this->response(
                     $models,
                     "User Credentials Login Successfully...!",
-                    201
+                    200
                 );
             } else {
                 $this->response(

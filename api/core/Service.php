@@ -1,6 +1,5 @@
 <?php 
-	define('ACTIVE', 1);
-	define('INACTIVE', 0);
+
 	
 	interface Api {
 		public function sanitazion();
@@ -10,6 +9,7 @@
 
 	require_once SITE_ROOT."/api/Libraries/GUMP-master/gump.class.php";
 	require_once SITE_ROOT."/api/Libraries/Response.php";
+	require_once SITE_ROOT."/api/Libraries/constants.php";
 
 	class Controller extends Response implements Api {
 		public $data;
@@ -36,7 +36,7 @@
 			$this->get = $get;
 
 			foreach($args as $arg) {
-				$this->{$arg->showTableName()."Model"} = $arg;
+				$this->{str_replace("_", "", $arg->showTableName()."Model")} = $arg;
 			}
 
 			$this->sanitazion();

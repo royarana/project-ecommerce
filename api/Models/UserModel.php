@@ -1,5 +1,5 @@
 <?php 
-    require API_MODEL;
+    require_once(API_MODEL);
 
     class UsersModel extends Model {
         function __construct() {

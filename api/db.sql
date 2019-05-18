@@ -15,6 +15,15 @@ create table users (
     date_updated datetime not null default now() ON UPDATE CURRENT_TIMESTAMP
 );
 
+create table user_tokens (
+    id int(11) auto_increment primary key,
+    user_id int(11),
+    token varchar(100) not null,
+    status BOOLEAN default true,
+    date_created datetime not null default now(),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 create table products (
     id int(11) auto_increment primary key,
     description varchar(50) not null unique,
