@@ -15,6 +15,55 @@
 		window.PUBLIC_URL = function(url) {
 			return "http://localhost/project-ecommerce/public/" + url
 		}
+
+		window._100char = function(string) {
+			return string.substr(0,100) 
+		}
+
+		window.createCard = function (obj) {
+				var divProd = document.createElement('div'),
+					cardBody = document.createElement('div'),
+					featuredImg = document.createElement('img'),
+					cardTitle = document.createElement('h5'),
+					pDesc = document.createElement('p'),
+					aBuy = document.createElement('button'),
+					readMore = document.createElement('button'),
+					buyIcon = document.createElement('i'),
+					readIcon = document.createElement('i')
+					buyIcon.className = "fas fa-shopping-cart"
+					readIcon.className = "fas fa-search"
+
+					divProd.className = 'card mt-5 carding'
+
+					featuredImg.className = "card-img-top"
+					featuredImg.setAttribute("alt", "...")
+					featuredImg.setAttribute("src", obj.picture)
+
+					cardBody.className = "card-body"
+					cardTitle.className = "card-title"
+					cardTitle.innerHTML = obj.description
+					pDesc.className = "card-text"
+					pDesc.innerHTML = _100char(obj.info)
+					aBuy.append(buyIcon)
+					readMore.append(readIcon)
+					aBuy.className = "btn btn-primary mx-1"
+					readMore.className = "btn btn-success"
+					aBuy.setAttribute('href', '#')
+
+					var buttonDiv = document.createElement('div')
+
+					buttonDiv.className = "col-lg-12 px-0 mx-0 text-right"
+					buttonDiv.append(readMore)
+					buttonDiv.append(aBuy)
+
+					cardBody.append(cardTitle)
+					cardBody.append(pDesc)
+					cardBody.append(buttonDiv)
+					divProd.append(featuredImg)
+					divProd.append(cardBody)
+
+				return divProd;
+		}
 	})();
 </script>
 <body>
@@ -24,8 +73,8 @@
 				<div class="row">
 					<img src = "./images/square_logo.svg">
 					<div class="container d-flex flex-column justify-content-start">
-				   		<a class="navbar-brand" href="#">JRO Inc.</a>
-					    <p class="navbar-brand" href="#">Shoe Shop</p>  
+				   		<a class="navbar-brand" href="index.php">JRO Inc.</a>
+					    <p class="navbar-brand" href="index.php">Shoe Shop</p>  
 				    </div>
 				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				    <span class="navbar-toggler-icon"></span>
@@ -45,8 +94,8 @@
 
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			    <div class="navbar-nav" id="nav-home">
-			      <a class="nav-item nav-link active" href="#">HOME</a>
-			      <a class="nav-item nav-link" href="#">PRODUCTS</a>
+			      <a class="nav-item nav-link active" href="index.php">HOME</a>
+			      <a class="nav-item nav-link" href="products.php">PRODUCTS</a>
 			    </div>
 			</div>
 			  </div>

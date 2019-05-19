@@ -31,8 +31,8 @@ Class Model extends Response {
 		$this->send(array("MY_SQL_ERROR" => $message), "You have Error in MYSQL", 500);
 	}
 
-	function page($page, $number = 10) {
-		$OFFSET = 10 * ($page - 1);
+	function page($page, $number = 8) {
+		$OFFSET = $number * ($page - 1);
 		$this->_limit = "LIMIT {$number} OFFSET {$OFFSET}";
 	}
 

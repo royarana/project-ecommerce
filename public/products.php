@@ -158,3 +158,32 @@
 <?php 
 	include './layouts/footer.php';
 ?>
+
+<script>
+	$(document).ready(function() {
+		var queryString = new URLSearchParams(location.search),
+			searchValue = queryString.has('search') ? queryString.get('search') : ""
+
+		function loadProducts(page = 1, search = "") {
+			Swal.enableLoading();
+			var url = API_URL('product/list/' + page)
+			if (search !== "") {
+				url = url + "/" + search
+			}
+
+			$.ajax({
+				url: url,	
+				success: function(response) {
+					var data = response.data
+
+					data.forEach(function(row) {
+						console.log(row)
+					})
+					Swal.close();
+				}
+			})
+		}
+
+		loadProducts(1, searchValue)
+	});
+</script>

@@ -82,22 +82,11 @@
 						featuredProducts = $("#featured-products")
 					
 					carousel.empty();
-
 					data.forEach(function(obj, index) {
 						var li = document.createElement('li'),
 							div = document.createElement('div'),
 							img = document.createElement('img'),
-							divProd = document.createElement('div'),
-							cardBody = document.createElement('div'),
-							featuredImg = document.createElement('img'),
-							cardTitle = document.createElement('h5'),
-							pDesc = document.createElement('p'),
-							aBuy = document.createElement('button'),
-							readMore = document.createElement('button'),
-							buyIcon = document.createElement('i'),
-							readIcon = document.createElement('i')
-							buyIcon.className = "fas fa-shopping-cart"
-							readIcon.className = "fas fa-search"
+							divProd = createCard(obj)
 							
 						li.setAttribute("data-target", "#carouselExampleIndicators")
 						li.setAttribute("data-slide-to", index.toString())
@@ -114,37 +103,8 @@
 						div.append(img)
 						carouselPic.append(div)
 
-						divProd.className = 'card mt-5 carding'
-
-						featuredImg.className = "card-img-top"
-						featuredImg.setAttribute("alt", "...")
-						featuredImg.setAttribute("src", obj.picture)
-						
-						cardBody.className = "card-body"
-						cardTitle.className = "card-title"
-						cardTitle.innerHTML = obj.description
-						pDesc.className = "card-text"
-						pDesc.innerHTML =obj.description
-						aBuy.append(buyIcon)
-						readMore.append(readIcon)
-						aBuy.className = "btn btn-primary mx-1"
-						readMore.className = "btn btn-success"
-						aBuy.setAttribute('href', '#')
-
-						var buttonDiv = document.createElement('div')
-						
-						buttonDiv.className = "col-lg-12 px-0 mx-0 text-right"
-						buttonDiv.append(readMore)
-						buttonDiv.append(aBuy)
-
-						cardBody.append(cardTitle)
-						cardBody.append(pDesc)
-						cardBody.append(buttonDiv)
-						divProd.append(featuredImg)
-						divProd.append(cardBody)
 						featuredProducts.append(divProd)
 					})
-
 				}
 			});
 	});
