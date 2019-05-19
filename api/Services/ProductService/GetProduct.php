@@ -22,14 +22,15 @@
         }
 
         function run() {
+            
             $this->ProductsModel->where('status', ACTIVE);
+
             $this->ProductsModel->page($this->params["page"]);
            
             if (isset($this->params['search'])) {
                 $this->ProductsModel->search('description', $this->params["search"]);
             }
             
-
             if(!empty($this->get)) {
                 if (isset($this->get["gender"])) {
                     $gender = implode(",", $this->get["gender"]);
@@ -43,6 +44,9 @@
             }
             
             $models = $this->ProductsModel->getRows();
+            $rowPaginate = $this->ProductsModel->countRows();
+
+            $models = array_merge(array("data" => $models), array("paginate"=> $rowPaginate));
 
             $this->send(
                 $models,

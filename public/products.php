@@ -8,15 +8,13 @@
 <!--end carousel -->
 
 <div class="container-2 d-flex flex-column justify-content-end mb-5">
-  <f>
-	<nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-light bg-light">
 	  <a class="navbar-brand">Welcome to JRO Inc.</a>
 	  <form class="form-inline" id = "form-search">
 			<input class="form-control mr-sm-2" type="search" id = "find" placeholder="Search" aria-label="Search">
 	    <button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="button">Search</button>
 	  </form>
 	</nav>
-  </div>
 </div>
 
 <hr>
@@ -35,6 +33,8 @@
 	<div class = "d-flex flex-wrap mb-5 col-lg-10" id = "products">
 	</div>
 </div>
+
+<div class = "row mr-5" id = "demo1"></div>
 <?php 
 	include './layouts/footer.php';
 ?>
@@ -45,7 +45,6 @@
 			searchValue = queryString.has('search') ? queryString.get('search') : "",
 			products = $("#products"),
 			page = 1
-
 
 		$.ajax({
 			url: API_URL('product/links'),
@@ -87,9 +86,6 @@
 					$("#product-links").append(div)
 				})
 				
-			},
-			error: function(resp){
-				console.log(resp)
 			}
 		})
 
@@ -120,8 +116,8 @@
 		}
 
 		function loadProducts(search = "", category= [], gender = []) {
-			Swal.enableLoading();
 			var url = API_URL('product/list/' + page)
+
 			if (search !== "") {
 				url = url + "/" + search
 			}
@@ -137,12 +133,30 @@
 				search.gender = gender
 			}
 
+			Swal.enableLoading();
+			alert();
+
 			$.ajax({
 				url: url,
 				data: search,
 				success: function(response) {
-					var data = response.data
-					console.log(response)
+					
+					var result = response.data,
+						data = result.data,
+						paginate = result.paginate
+						
+					$('#demo1').pagination({
+							items: paginate,
+							itemsOnPage: 8,
+							cssStyle: 'light-theme',
+							onPageClick: function(pageNumber) {
+								page = pageNumber
+								setTimeout(function (){
+									$("#search").trigger('click');
+								}, 100);
+							}
+					});
+
 					if(data.length > 0) {
 						data.forEach(function(row) {
 							var divProd = createCard(row)
@@ -153,6 +167,9 @@
 						products.append(h4)
 					}
 					Swal.close();
+				},
+				error: function(response) {
+					console.log(response)
 				}
 			})
 		}

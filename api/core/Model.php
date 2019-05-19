@@ -16,6 +16,7 @@ Class Model extends Response {
 	private $_select = null;
 	private $_limit = "";
 	public $_additional = "";
+	public $_orderBy = "";
 
 	function __construct($tableName = "") {
 		global $CONFIG;
@@ -35,6 +36,12 @@ Class Model extends Response {
 	function page($page, $number = 8) {
 		$OFFSET = $number * ($page - 1);
 		$this->_limit = "LIMIT {$number} OFFSET {$OFFSET}";
+		$this->_orderBy = " ORDER BY ID DESC ";
+	}
+
+	function countRows() {
+		$this->select('count(1) as rows');
+        return $this->getOne()["rows"];
 	}
 
 	function create($data) {
@@ -103,6 +110,7 @@ Class Model extends Response {
 		 $this->_select = null;
 		 $this->_limit = "";
 		 $this->_additional = "";
+		 $this->_orderBy = "";
 	}
 
 	function _setConnection() {
@@ -198,7 +206,7 @@ Class Model extends Response {
 			}
 		}
 
-		$this->_select .= " {$joinStr} {$whereStr} {$this->_additional} {$this->_limit}";
+		$this->_select .= " {$joinStr} {$whereStr} {$this->_additional} {$this->_orderBy} {$this->_limit}";
 		$stmt = $this->_conn->prepare($this->_select);
 
 		//adds value
@@ -226,6 +234,7 @@ Class Model extends Response {
 		    $result[] = $data;
 		}
 
+		$this->clear();
 		return $result;
 	}
 

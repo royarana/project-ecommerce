@@ -69,3 +69,7 @@ footer .container3 {
 #carousel-picture div img{
 	height: 500px;
 }
+
+#demo1 {
+	float: right !important;
+}
