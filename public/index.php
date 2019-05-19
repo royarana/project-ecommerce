@@ -25,17 +25,9 @@
 
 <!--end carousel -->
 
-	<div class="container-2 d-flex flex-column justify-content-end mb-5">
-	<div>
-		<nav class="navbar navbar-light bg-light">
-			<a class="navbar-brand">Welcome to JRO Inc.</a>
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" id="find" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="button">Search</button>
-			</form>
-		</nav>
-		</div>
-</div>
+<?php 
+	include_once('layouts/search.php');
+?>
 
 <!-- FEATURE -->
 

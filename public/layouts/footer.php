@@ -18,56 +18,67 @@
 	</div>
 </footer>
 
-<script
-			  src="https://code.jquery.com/jquery-3.2.1.min.js"
-			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-			  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="./jquery.simplePagination.js"></script>
 <script>
-	$(document).ready(function() {
-		$("#login").click(function(event) {
-			event.preventDefault();
+	window.user = localStorage.getItem('user')
 
-			Swal.fire({
-				title: 'Login..!',
-				type: 'info',
-				html:
-					'<div class = "row pl-3">Username:</div>' +
-					'<input id="username" placeholder = "Username" type = "text" class="swal2-input">' +
-					'<div class = "row pl-3">Password:</div>' +
-					'<input id="password" placeholder = "Username" type = "password" class="swal2-input">',
-				cancelButtonColor: '#d33',
-				showCancelButton: true
-			}).then((result) => {
-				if (result.value) {
-					var username = $("#username").val(),
-					  password = $("#password").val(),
-					  data = {
-							email: username,
-							password: password
-					  }
+	if (user) {
+		window.user = JSON.parse(user)
+		$('#username').html("Hi " + window.user["full_name"])
+		$('.login').hide();
+		$('.logout').show();
+	} else {
+		$('.login').show();
+		$('.logout').hide();
+	}
 
-					$.ajax({
-						method: "POST",
-						dataType: "json",
-						data: {
-							email: username,
-							password: password
-						},
-						url: API_URL('user/login'),
-						success: function(response) {
-							console.log(response)
-							alert('success')
-						},
-						error: errorAjax
-					})
-				}
-			})
-		})
+	$('#login').click(function(event) {
+		event.preventDefault();
+		login()
 	})
+
+	function login() {
+		Swal.fire({
+			title: 'Login..!',
+			type: 'info',
+			html:
+				'<div class = "row pl-3">Username:</div>' +
+				'<input id="username" placeholder = "Username" type = "text" class="swal2-input">' +
+				'<div class = "row pl-3">Password:</div>' +
+				'<input id="password" placeholder = "Username" type = "password" class="swal2-input">',
+			cancelButtonColor: '#d33',
+			showCancelButton: true
+		}).then((result) => {
+			if (result.value) {
+				var username = $("#username").val(),
+				password = $("#password").val(),
+				data = {
+						email: username,
+						password: password
+				}
+				Swal.enableLoading();
+
+				$.ajax({
+					method: "POST",
+					dataType: "json",
+					data: {
+						email: username,
+						password: password
+					},
+					url: API_URL('user/login'),
+					success: function(response) {
+						localStorage.setItem('user', JSON.stringify(response.data))
+						success(response.message, location.reload)
+					},
+					error: errorAjax
+				})
+			}
+		})
+	}
 </script>
 </body>
 </html>

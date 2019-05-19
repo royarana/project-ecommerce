@@ -22,14 +22,22 @@
 		}
 
 		window.errorAjax = function(response) {
-			console.log(response)
 			var err = Object.keys(response.responseJSON.data)
-			console.log(err)
 			Swal.fire({
 				title: response.responseJSON.message,
 				type: "error",
 				text: response.responseJSON.data[err[0]]
 			})
+		}
+
+		window.success = function(message, fn = null) {
+			Swal.fire('Success...!', message, 'success').then( 
+				function() {
+					if (fn !== null) {
+						fn();
+					}
+				}
+			)
 		}
 
 		window.createCard = function (obj) {
@@ -98,9 +106,12 @@
 			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			    <div class="navbar-nav" id="nav-my-account" >
 			      <a id="account" class="nav-item nav-link active" href="#">MY ACCOUNT </a>
-			      <a id="checkout" class="nav-item nav-link" href="#">CHECKOUT</a>
-			      <a id="login"class="nav-item nav-link" href="#">LOGIN</a>
-			      <a id="register"class="nav-item nav-link" href="#">REGISTER</a>
+						<a id="checkout" class="nav-item nav-link" href="#">CHECKOUT</a>
+						
+						<a id="login" class="nav-item nav-link login" href="#">LOGIN</a>
+						<a id="register" class="nav-item nav-link login" href="#">REGISTER</a>
+
+						<a id="logout" class="nav-item nav-link logout" href="#">LOGOUT</a>
 			    </div>
 			  </div>
 
