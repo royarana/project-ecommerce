@@ -26,5 +26,48 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="./jquery.simplePagination.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#login").click(function(event) {
+			event.preventDefault();
+
+			Swal.fire({
+				title: 'Login..!',
+				type: 'info',
+				html:
+					'<div class = "row pl-3">Username:</div>' +
+					'<input id="username" placeholder = "Username" type = "text" class="swal2-input">' +
+					'<div class = "row pl-3">Password:</div>' +
+					'<input id="password" placeholder = "Username" type = "password" class="swal2-input">',
+				cancelButtonColor: '#d33',
+				showCancelButton: true
+			}).then((result) => {
+				if (result.value) {
+					var username = $("#username").val(),
+					  password = $("#password").val(),
+					  data = {
+							email: username,
+							password: password
+					  }
+
+					$.ajax({
+						method: "POST",
+						dataType: "json",
+						data: {
+							email: username,
+							password: password
+						},
+						url: API_URL('user/login'),
+						success: function(response) {
+							console.log(response)
+							alert('success')
+						},
+						error: errorAjax
+					})
+				}
+			})
+		})
+	})
+</script>
 </body>
 </html>

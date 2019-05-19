@@ -29,7 +29,7 @@
 			echo "Controller";
 		}
 		
-		function __construct($body, $params, $get, ...$args) {
+		function __construct($body = array(), $params = array(), $get= array(), ...$args) {
 			$this->gump = new GUMP();
 			$this->body = $body;
 			$this->params = $params;
@@ -46,6 +46,7 @@
 
 		function validationErr($rules, $data = array()) {
 			$gump = $this->gump;
+
 			$this->body = $gump->sanitize($this->body);
 			$data = (empty($data)) ? $this->body : $gump->sanitize($data);
 			$data = $gump->sanitize($data);

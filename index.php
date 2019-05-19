@@ -37,7 +37,11 @@
 			
 		if ($requestType === "GET") {
 		    $GET = $_GET;
-		} else {
+		} else if ($requestType === "POST") {
+			$body = $_POST;
+			parse_str($_SERVER["QUERY_STRING"], $GET);
+		}
+		else {
 			$content = trim(file_get_contents('php://input'));
 			parse_str($_SERVER["QUERY_STRING"], $GET);
 			$body = json_decode($content, true);
@@ -67,6 +71,7 @@
 					
 					if (count($pathRoute) === count($pathExplode)) {
 						require "./api/Services/{$requestMethod[1]}.php";
+						//header('Content-Type: application/json');
 						$requestedController = new $controller($body, $params, $GET);
 						exit;
 					}
