@@ -9,13 +9,14 @@
         $res = $ProductModel->getActive($barcode, 'barcode', $active);
         
         if(empty($res)) {
-            new Response->send(
-                    array(
-                        "barcode" => $barcode
-                    ), 
-                    "Barcode does not Exist...!", 
-                    400
-                );
+            $resp = new Response();
+            $resp->send( 
+                array(
+                    "barcode" => $barcode
+                ), 
+                "Barcode does not Exist...!", 
+                400
+            );
         }
 
         return $res;

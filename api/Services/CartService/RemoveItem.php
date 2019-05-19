@@ -2,19 +2,19 @@
 
     require_once API_SERVICE;
     require_once SERVICE_FOLDER."UserService/CheckLogin.php";
-    require_once SERVICE_FOLDER."ProductService/ProductExist.php";
+    require_once SERVICE_FOLDER."CartService/ItemExist.php";
 
-	class AddItem extends Controller {
+	class RemoveItem extends Controller {
         
 		function __construct($body, $params, $get) {
             require_once MODELS."CartItemModel.php";
+            global $CartItemModel;
             parent::__construct($body, $params, $get, $CartItemModel);
         }
 
         function sanitazion() {
             $rules = array(
-                'barcode' => 'required',
-                'quantity' => 'required|integer',
+                'id' => 'required',
                 'token' => 'required'
             );
 
@@ -23,19 +23,19 @@
 
         function middleware() {
            checkLogin($this->body["token"]);
-           $this->body["product"] = ProductExist($this->body["barcode"]);
+           $this->body["item"] = ItemExist($this->body["id"]);
         }
 
         function run() {
-            $item = $this->CartItemsModel->addToCart($this->body["quantity"], $this->body["product"]);
-            
+            $this->CartItemsModel->removeToCart($this->body["id"]);
+
             $this->send(
-               $item,
-               "Product {$item["description"]} to Cart Successfully...!",
-               201
+                array(),
+               "Product {$this->body["item"]["description"]} in Cart Successfully Removed...!",
+               200
             );
         }
     }
     
-    $controller = "AddItem";
+    $controller = "RemoveItem";
 ?>

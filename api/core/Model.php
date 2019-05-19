@@ -253,6 +253,7 @@ Class Model extends Response {
 			"status" => ACTIVE
 		));
 	}
+	
 
 	function whereStmt() {
 		if (!empty($this->_where)) {

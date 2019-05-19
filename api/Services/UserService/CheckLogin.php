@@ -8,8 +8,9 @@
        $UserTokenModel->where('status', ACTIVE);
        $res = $UserTokenModel->getOne();
 
-       if(empty($res)) {
-           new Response->send(
+        if(empty($res)) {
+            $resp = new Response();
+            $resp->send( 
                 array(
                     "token" => $token
                 ), 
