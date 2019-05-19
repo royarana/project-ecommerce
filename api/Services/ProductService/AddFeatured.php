@@ -28,7 +28,7 @@
         function run() {
             $productName = $this->body["product"]["description"];
             $this->FeaturedModel->setFeatured($this->body["product"]["id"]);
-            $this->response(
+            $this->send(
                array(),
                "Product {$productName} Featured Successfully...!",
                201

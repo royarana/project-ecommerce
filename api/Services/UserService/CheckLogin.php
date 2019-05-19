@@ -9,7 +9,7 @@
        $res = $UserTokenModel->getOne();
 
        if(empty($res)) {
-           new Response(
+           new Response->send(
                 array(
                     "token" => $token
                 ), 

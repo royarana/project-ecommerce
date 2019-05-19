@@ -36,7 +36,7 @@
             $res = $this->ProductsModel->getOne();
 
             if (empty($res)) {
-                $this->response(
+                $this->send(
                     array(),
                     "Product Not Exist",
                     400
@@ -59,7 +59,7 @@
                 $update["picture"] = $directory;
                 
                 if($file_size > 2097152) {
-                    $this->response(
+                    $this->send(
                         array(),
                         "File Size must be 2mb or below...!",
                         500
@@ -69,13 +69,13 @@
                 if (move_uploaded_file($file_tmp, $directory)) {
                     $this->ProductsModel->where('id', $this->body['id']);
                     $models = $this->ProductsModel->update($update);
-                    $this->response(
+                    $this->send(
                         $models,
                         "Products Updated Successfully...!",
                         201
                     );
                 } else {
-                    $this->response(
+                    $this->send(
                         array(),
                         "File Unsuccessfully Uploaded",
                         500
@@ -84,7 +84,7 @@
             } else {
                 $this->ProductsModel->where('id', $this->body['id']);
                 $models = $this->ProductsModel->update($update);
-                $this->response(
+                $this->send(
                     $models,
                     "Products Updated Successfully...!",
                     201

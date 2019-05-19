@@ -28,7 +28,7 @@
         function run() {
             $productName = $this->body["product"]["description"];
             $this->FeaturedModel->removeFeatured($this->body["product"]["id"]);
-            $this->response(
+            $this->send(
                array(),
                "{$productName} Remove in Featured Products Successfully...!",
                201

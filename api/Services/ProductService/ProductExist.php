@@ -9,7 +9,7 @@
         $res = $ProductModel->getActive($barcode, 'barcode', $active);
         
         if(empty($res)) {
-            new Response(
+            new Response->send(
                     array(
                         "barcode" => $barcode
                     ), 

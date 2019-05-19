@@ -29,7 +29,7 @@
         function run() {
             $this->UsersModel->where("id", $this->params["id"]);
             $models = $this->UsersModel->update($this->body);
-            $this->response(
+            $this->send(
                 $models,
                 "User Updated Successfully...!",
                 201

@@ -31,7 +31,7 @@
 
         function run() {
             $models = $this->UsersModel->create($this->body);
-            $this->response(
+            $this->send(
                 $models,
                 "User Created Successfully...!",
                 201

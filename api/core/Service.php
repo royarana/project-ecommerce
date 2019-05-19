@@ -53,7 +53,7 @@
             $validated_data = $gump->run($data);
             
             if($validated_data === false) {
-                $this->response($gump->get_errors_array(), "Validation Error...!", 400);
+                $this->send($gump->get_errors_array(), "Validation Error...!", 400);
 			}
 			$this->setBody($rules);
 		}

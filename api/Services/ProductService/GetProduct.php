@@ -30,7 +30,7 @@
             }
             
             $models = $this->ProductsModel->getRows();
-            $this->response(
+            $this->send(
                 $models,
                 "Products Retrieved Successfully...!"
             );

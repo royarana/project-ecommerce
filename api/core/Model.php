@@ -28,7 +28,7 @@ Class Model extends Response {
 	}
 
 	function mysqlError($message) {
-		$this->response(array("MY_SQL_ERROR" => $message), "You have Error in MYSQL", 500);
+		$this->send(array("MY_SQL_ERROR" => $message), "You have Error in MYSQL", 500);
 	}
 
 	function page($page, $number = 10) {

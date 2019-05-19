@@ -39,13 +39,13 @@
                 $models["token"] = GenerateToken($username);
 
                 $this->UserTokensModel->generateToken($models);
-                $this->response(
+                $this->send(
                     $models,
                     "User Credentials Login Successfully...!",
                     200
                 );
             } else {
-                $this->response(
+                $this->send(
                     array(),
                     "User Crendentials Incorrect...!",
                     400

@@ -27,7 +27,7 @@
 
         function run() {
             $this->ProductsModel->inactive($this->body["product"]["id"]);
-            $this->response(
+            $this->send(
                 array(),
                 "Products Deactivated Successfully...!",
                 201

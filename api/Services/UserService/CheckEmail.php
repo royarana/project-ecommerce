@@ -9,7 +9,7 @@
        $res = $UserModel->getOne();
 
        if(!empty($res)) {
-           new Response(
+           new Response->send(
                 array(
                     "email" => $email
                 ), 

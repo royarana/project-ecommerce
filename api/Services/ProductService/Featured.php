@@ -16,7 +16,7 @@
             $this->ProductsModel->where('products.status', ACTIVE);
 
             $models = $this->ProductsModel->getRows();
-            $this->response(
+            $this->send(
                 $models,
                 "Products Featured Retrieved Successfully...!"
             );

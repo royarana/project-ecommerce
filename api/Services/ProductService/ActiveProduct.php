@@ -27,7 +27,7 @@
 
         function run() {
             $this->ProductsModel->active($this->body["product"]["id"]);
-            $this->response(
+            $this->send(
                 array(),
                 "Products Activated Successfully...!",
                 201

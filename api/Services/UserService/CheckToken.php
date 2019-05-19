@@ -22,7 +22,7 @@
         }
 
         function run() {
-            $this->response(
+            $this->send(
                 array(),
                 "User Token is Active",
                 200
