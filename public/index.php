@@ -12,13 +12,13 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="images/carousel4.jpg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel7.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/carousel3.jpg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel8.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/carousel2.jpg" class="d-block w-100" alt="..." width="300" height="400">
+      <img src="images/carousel9.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
 		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -52,7 +52,7 @@
 <!-- FEATURE -->
 
 <div class="card bg-dark text-white mb-5">
-  <img src="images/carousel4.jpg" class="card-img" alt="...">
+  <img src="images/carousel10.jpg" class="card-img" alt="...">
   <div class="card-img-overlay">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>

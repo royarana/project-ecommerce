@@ -8,7 +8,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
-			<div>
+			<div id="navbar-search">
 				<div class="row">
 					<img src = "./images/square_logo.svg">
 					<div class="container d-flex flex-column justify-content-start">
@@ -35,8 +35,6 @@
 			    <div class="navbar-nav" id="nav-home">
 			      <a class="nav-item nav-link active" href="#">HOME</a>
 			      <a class="nav-item nav-link" href="#">PRODUCTS</a>
-			      <a class="nav-item nav-link" href="#">BLOGS</a>
-			      <a class="nav-item nav-link" href="#">CONTACT</a>
 			    </div>
 			</div>
 			  </div>

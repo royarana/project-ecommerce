@@ -19,12 +19,66 @@
   </div>
 </div>
 
-<!-- CARD -->
+<hr>
+<!-- DROPDOWN -->
 
 <div class="row">
-	<div class = "col-lg-2 mt-5">
-		Items
+	<div class = "col-lg-2 mt-5 mb-5 text-center" id="container-product" >
+		<h4>PRODUCT CATEGORY</h4>
+		<hr>
+		<div>
+			<div class="dropdown">
+  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    GENDER
+  </button>
+  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">MEN</a>
+    <a class="dropdown-item" href="#">WOMEN</a>
+    <a class="dropdown-item" href="#">KIDS</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    PRODUCT TYPE
+  </button>
+  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">SHOES</a>
+    <a class="dropdown-item" href="#">TRAINERS</a>
+    <a class="dropdown-item" href="#">SANDALS & FLIP FLOPS</a>
+    <a class="dropdown-item" href="#">SPORT SHOES</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    SIZE
+  </button>
+  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton"">
+    <a class="dropdown-item" href="#">SMALL</a>
+    <a class="dropdown-item" href="#">MEDIUM</a>
+    <a class="dropdown-item" href="#">LARGE</a>
+    <a class="dropdown-item" href="#">EXTRA LARGE</a>
+  </div>
+</div>
+
+
+<div class="dropdown">
+  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    FABRICATE
+  </button>
+  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">LEATHER</a>
+    <a class="dropdown-item" href="#">FABRIC</a>
+    <a class="dropdown-item" href="#">RUBBER</a>
+  </div>
+</div>
+
+		</div>
 	</div>
+	<!-- END OF DROPDOWN -->
+
+	<!-- CARD -->
 	<div class = "d-flex flex-wrap justify-content-between mb-5 col-lg-10">
 		<div class="card mt-5 carding">
 			<img src="images/shoe18.jpg" class="card-img-top" alt="...">
