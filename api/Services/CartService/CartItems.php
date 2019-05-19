@@ -23,8 +23,10 @@
         }
 
         function run() {
+            $items = $this->CartItemsModel->getItems($this->body["user"]["user_id"]);
+
             $this->send(
-                $this->body["user"],
+                $items,
                 "Retrived Cart Items Successfully"
             );
         }
