@@ -3,8 +3,11 @@
     require_once SITE_ROOT."/api/Libraries/Response.php";
     require_once MODELS."CartItemModel.php";
 
-    function ItemExist($id) {
+    function ItemExist($id, $user_id) {
+
         global $CartItemModel;
+        
+        $CartItemModel->where("user_id", $user_id);
         $CartItemModel->select("*");
         $res = $CartItemModel->getActive($id);
 

@@ -22,12 +22,12 @@
         }
 
         function middleware() {
-           checkLogin($this->body["token"]);
-           $this->body["item"] = ItemExist($this->body["id"]);
+           $this->body["user"] = checkLogin($this->body["token"]);
+           $this->body["item"] = ItemExist($this->body["id"], $this->body["user"]["user_id"]);
         }
 
         function run() {
-            $this->CartItemsModel->removeToCart($this->body["id"]);
+            $this->CartItemsModel->removeToCart($this->body["id"], $this->body["user"]["user_id"]);
 
             $this->send(
                 array(),

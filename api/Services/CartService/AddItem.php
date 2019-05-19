@@ -22,13 +22,13 @@
         }
 
         function middleware() {
-           checkLogin($this->body["token"]);
+           $this->body["user"] = checkLogin($this->body["token"]);
            $this->body["product"] = ProductExist($this->body["barcode"]);
         }
 
         function run() {
-            $item = $this->CartItemsModel->addToCart($this->body["quantity"], $this->body["product"]);
-            
+
+            $item = $this->CartItemsModel->addToCart($this->body["quantity"], $this->body["product"], $this->body["user"]["user_id"]);            
             $this->send(
                $item,
                "Product {$item["description"]} to Cart Successfully...!",

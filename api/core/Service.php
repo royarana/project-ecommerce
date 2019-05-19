@@ -55,14 +55,14 @@
             if($validated_data === false) {
                 $this->send($gump->get_errors_array(), "Validation Error...!", 400);
 			}
-			$this->setBody($rules);
+			$this->setBody($rules, $data);
 		}
 
-		function setBody($rules) {
+		function setBody($rules, $data = array()) {
 			$body = array();
 
 			foreach($rules as $index => $value) {
-				$body[$index] = $this->body[$index];
+				$body[$index] = (empty($data)) ? $this->body[$index] : $data[$index];
 			}
 
 			$this->body = $body;

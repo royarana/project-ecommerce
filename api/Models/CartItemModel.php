@@ -6,10 +6,12 @@
             parent::__construct("Cart_Items");
         }
 
-        function addToCart($quantity, $product) {
+        function addToCart($quantity, $product, $user_id) {
+            
             $product["product_id"] = $product["id"];
+            $product["user_id"] = $user_id;
             unset($product["id"]);
-
+            
             $product["quantity"] = $quantity;
             $id = $this->create($product);
 
@@ -18,7 +20,9 @@
             return $this->getOne();
         }
 
-        function removeToCart($id) {
+        function removeToCart($id, $user_id) {
+
+            $this->where("user_id", $user_id);
             return $this->inactive($id);
         }
     }

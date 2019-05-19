@@ -67,14 +67,12 @@
 					
 					if (count($pathRoute) === count($pathExplode)) {
 						require "./api/Services/{$requestMethod[1]}.php";
-						
 						$requestedController = new $controller($body, $params, $GET);
 						exit;
 					}
 				}
 			}
 		}
-		exit;
 		header('Content-Type: application/json');
 		http_response_code(500);
 		echo json_encode(array("message" => "NO API FOUND"));

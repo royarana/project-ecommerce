@@ -56,6 +56,7 @@ create table carts (
 create table cart_items (
     id int(11) auto_increment primary key,
     cart_id int(11) default null,
+    user_id int(11) default null,
     quantity int(11) not null,
     product_id int(11),
     price decimal(19,4),
@@ -64,6 +65,7 @@ create table cart_items (
     barcode varchar(50) not null,
     status BOOLEAN default true,
     date_created datetime not null default now(),
+    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (cart_id) REFERENCES carts(id)
 );
