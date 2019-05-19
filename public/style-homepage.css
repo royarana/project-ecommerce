@@ -46,7 +46,7 @@ footer .container3 {
 
 .carding {
 	padding: 5px 5px 5px 5px;
-	flex: 1 0 21%; /* explanation below */
+	flex: 0 0 21%; /* explanation below */
  	margin: 5px;
 }
 

@@ -12,8 +12,8 @@
 	<nav class="navbar navbar-light bg-light">
 	  <a class="navbar-brand">Welcome to JRO Inc.</a>
 	  <form class="form-inline">
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	    <input class="form-control mr-sm-2" type="search" id = "find" placeholder="Search" aria-label="Search">
+	    <button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="submit">Search</button>
 	  </form>
 	</nav>
   </div>
@@ -79,7 +79,7 @@
 	<!-- END OF DROPDOWN -->
 
 	<!-- CARD -->
-	<div class = "d-flex flex-wrap justify-content-between mb-5 col-lg-10" id = "products">
+	<div class = "d-flex flex-wrap mb-5 col-lg-10" id = "products">
 	</div>
 </div>
 <?php 
@@ -90,9 +90,10 @@
 	$(document).ready(function() {
 		var queryString = new URLSearchParams(location.search),
 			searchValue = queryString.has('search') ? queryString.get('search') : "",
-			products = $("#products")
+			products = $("#products"),
+			page = 1
 
-		function loadProducts(page = 1, search = "") {
+		function loadProducts(search = "") {
 			Swal.enableLoading();
 			var url = API_URL('product/list/' + page)
 			if (search !== "") {
@@ -105,16 +106,26 @@
 				success: function(response) {
 					var data = response.data
 
-					data.forEach(function(row) {
-						var divProd = createCard(row)
-						products.append(divProd)
-					})
-					
+					if(data.length > 0) {
+						data.forEach(function(row) {
+							var divProd = createCard(row)
+							products.append(divProd)
+						})
+					} else {
+						var h4 = '<h4 class = "ml-3 text-gray">0 Results...!</h4>';
+						products.append(h4)
+					}
+
 					Swal.close();
 				}
 			})
 		}
 
-		loadProducts(1, searchValue)
+		loadProducts(searchValue)
+
+		$("#search").click(function() {
+			loadProducts($("#find").val())
+		})
+
 	});
 </script>
