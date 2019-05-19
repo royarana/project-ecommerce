@@ -79,80 +79,7 @@
 	<!-- END OF DROPDOWN -->
 
 	<!-- CARD -->
-	<div class = "d-flex flex-wrap justify-content-between mb-5 col-lg-10">
-		<div class="card mt-5 carding">
-			<img src="images/shoe18.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card ssstitle</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe19.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe20.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe21.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe22.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe23.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="card mt-5 carding">
-			<img src="images/shoe24.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="card mt-5 carding ">
-			<img src="images/shoe25.jpg" class="card-img-top" alt="..." >
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  	<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
+	<div class = "d-flex flex-wrap justify-content-between mb-5 col-lg-10" id = "products">
 	</div>
 </div>
 <?php 
@@ -162,7 +89,8 @@
 <script>
 	$(document).ready(function() {
 		var queryString = new URLSearchParams(location.search),
-			searchValue = queryString.has('search') ? queryString.get('search') : ""
+			searchValue = queryString.has('search') ? queryString.get('search') : "",
+			products = $("#products")
 
 		function loadProducts(page = 1, search = "") {
 			Swal.enableLoading();
@@ -170,6 +98,7 @@
 			if (search !== "") {
 				url = url + "/" + search
 			}
+			products.empty();
 
 			$.ajax({
 				url: url,	
@@ -177,8 +106,10 @@
 					var data = response.data
 
 					data.forEach(function(row) {
-						console.log(row)
+						var divProd = createCard(row)
+						products.append(divProd)
 					})
+					
 					Swal.close();
 				}
 			})
