@@ -15,6 +15,10 @@
             $this->ProductsModel->where('featured.status', ACTIVE);
             $this->ProductsModel->where('products.status', ACTIVE);
 
+            if (isset($this->get["search"])) {
+                $this->ProductsModel->search('featured.status', $this->get["search"]);
+            }
+
             $models = $this->ProductsModel->getRows();
             $this->send(
                 $models,

@@ -30,8 +30,8 @@
 		<nav class="navbar navbar-light bg-light">
 			<a class="navbar-brand">Welcome to JRO Inc.</a>
 			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" id="find" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="button">Search</button>
 			</form>
 		</nav>
 		</div>
@@ -68,9 +68,14 @@
 
 <script>
 	$(document).ready(function() {
+
+		$("#search").click(function() {
+			window.location = PUBLIC_URL('products.php?search='+ $("#find").val())
+		})
+
 			$.ajax({
 				url: API_URL("product/featured"),
-				success: function(response){ 
+				success: function(response) { 
 					var data = response.data,
 					  carousel = $("#carousel-num"),
 						carouselPic = $("#carousel-picture"),

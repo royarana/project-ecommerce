@@ -11,6 +11,10 @@
 		window.API_URL = function(url) {
 			return "http://localhost/project-ecommerce/index.php/api/" + url
 		}
+
+		window.PUBLIC_URL = function(url) {
+			return "http://localhost/project-ecommerce/public/" + url
+		}
 	})();
 </script>
 <body>

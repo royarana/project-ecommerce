@@ -24,17 +24,41 @@ create table user_tokens (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+
+create table categories(
+    id int(11) not null primary key auto_increment,
+    description varchar(100) not null
+);
+
+create table gender (
+    gender varchar(1) primary key,
+    description varchar(10) not null
+);
+
 create table products (
     id int(11) auto_increment primary key,
     description varchar(50) not null unique,
     barcode varchar(50) not null unique,
+    info varchar(200) not null,
+    gender varchar(1) not null,
+    category_id int(11) not null,
     price decimal(19,4) not null default 0,
     date_created datetime not null default now(),
     date_updated datetime not null default now() on update CURRENT_TIMESTAMP,
     picture text not null,
     inventory decimal(19,4) not null default 0,
-    status BOOLEAN default true
+    status BOOLEAN default true,
+    FOREIGN KEY (gender) REFERENCES gender(gender),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+
+INSERT into GENDER values ('F' ,'FEMALE');
+INSERT into GENDER values ('M', 'MALE');
+INSERT into GENDER values ('U', 'UNISEX');
+
+INSERT into CATEGORIES (description) values ('NIKE');
+INSERT into CATEGORIES (description) values ('ADIDAS');
+INSERT into CATEGORIES (description) values ('WORLD BALANCE');
 
 create table featured (
     id int(11) auto_increment primary key,

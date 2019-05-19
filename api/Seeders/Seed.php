@@ -1,5 +1,5 @@
 <?php
-define("SITE_ROOT", str_replace("\api\Seeders", "",getcwd()));
+define("SITE_ROOT", str_replace("/api/Seeders", "",getcwd()));
 define("API_MODEL", SITE_ROOT."/api/core/Model.php");
 define("MODELS", SITE_ROOT."/api/Models/");
 

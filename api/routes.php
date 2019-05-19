@@ -10,6 +10,7 @@
 		"api/product/inactive" => "PUT ProductService/InactiveProduct",
 		"api/product/featured/add" => "PUT ProductService/AddFeatured",
 		"api/product/featured/remove" => "PUT ProductService/RemoveFeatured",
+		"api/product/featured/search" => "GET ProductService/Featured",
 		"api/product/featured" => "GET ProductService/Featured",
 		"api/product/list/:page" => "GET ProductService/GetProduct",
 		"api/product/list/:page/:search" => "GET ProductService/GetProduct",
