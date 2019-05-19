@@ -5,7 +5,7 @@
 		"api/user/token" => "POST UserService/CheckToken",
 		"api/user/:id" => "PUT UserService/EditUser",
 		"api/product" => "POST ProductService/AddProduct",
-		"api/proudct/links" => "GET ProductService/ProductLink",
+		"api/product/links" => "GET ProductService/ProductLink",
 		"api/product/edit/:id" => "POST ProductService/EditProduct",
 		"api/product/active" => "PUT ProductService/ActiveProduct",
 		"api/product/inactive" => "PUT ProductService/InactiveProduct",

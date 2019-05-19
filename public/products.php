@@ -8,12 +8,12 @@
 <!--end carousel -->
 
 <div class="container-2 d-flex flex-column justify-content-end mb-5">
-  <div>
+  <f>
 	<nav class="navbar navbar-light bg-light">
 	  <a class="navbar-brand">Welcome to JRO Inc.</a>
 	  <form class="form-inline" id = "form-search">
 			<input class="form-control mr-sm-2" type="search" id = "find" placeholder="Search" aria-label="Search">
-	    <button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="submit">Search</button>
+	    <button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="button">Search</button>
 	  </form>
 	</nav>
   </div>
@@ -48,7 +48,7 @@
 
 
 		$.ajax({
-			url: API_URL('proudct/links'),
+			url: API_URL('product/links'),
 			success: function(response) {
 				var data = response.data,
 					links = Object.keys(data)
@@ -57,7 +57,8 @@
 					var link = data[row],
 						div = document.createElement('div'),
 						button = document.createElement('button'),
-						dropdown_menu = document.createElement('div')
+						dropdown_menu = document.createElement('div'),
+						categoryRow = row.toLowerCase();
 
 
 					div.className = "dropdown"
@@ -76,7 +77,8 @@
 					link.forEach(function(value) {
 						var a = document.createElement('a')
 						a.className = "dropdown-item search-category"
-						a.setAttribute('category', row.toLowerCase())
+						a.setAttribute('category', categoryRow)
+						a.setAttribute('id', (categoryRow === "gender") ? value.gender : value.id)
 						a.innerHTML = (value.description)
 						dropdown_menu.append(a)
 					})
@@ -85,12 +87,17 @@
 					$("#product-links").append(div)
 				})
 				
+			},
+			error: function(resp){
+				console.log(resp)
 			}
 		})
 
 		$("body").on('click', '.search-category', function(event) {
 			var categories = $('.remove-category'),
-				textCategory = this.innerHTML
+				textCategory = this.innerHTML,
+				id = this.getAttribute("id"),
+				catSearch = this.getAttribute("category")
 
 			categories.each(function(row) {
 				var button = categories[row]
@@ -100,7 +107,7 @@
 				}
 			})
 
-			var label = '<label class = "mr-3 p-1 text-white border border-white"> ' + textCategory + ' <button category = "'+textCategory+'" type = "button" class = "btn-sm btn btn-danger ml-1 remove-category">X</button> </label>'
+			var label = '<label class = "mr-3 p-1 text-white border border-white"> ' + textCategory + ' <button value-id = "'+id+'" category = "'+catSearch+'" type = "button" class = "btn-sm btn btn-danger ml-1 remove-category">X</button> </label>'
 			$("#form-search").prepend(label)
 		})
 
@@ -109,23 +116,33 @@
 		})
 
 		function removeCategory(obj) {
-			console.log(obj)
 			obj.parent().remove()
 		}
 
-		function loadProducts(search = "") {
+		function loadProducts(search = "", category= [], gender = []) {
 			Swal.enableLoading();
 			var url = API_URL('product/list/' + page)
 			if (search !== "") {
 				url = url + "/" + search
 			}
+
 			products.empty();
+			var search = {}
+
+			if (category.length > 0) {
+				search.category = category
+			}
+
+			if (gender.length > 0) {
+				search.gender = gender
+			}
 
 			$.ajax({
-				url: url,	
+				url: url,
+				data: search,
 				success: function(response) {
 					var data = response.data
-
+					console.log(response)
 					if(data.length > 0) {
 						data.forEach(function(row) {
 							var divProd = createCard(row)
@@ -135,7 +152,6 @@
 						var h4 = '<h4 class = "ml-3 text-gray">0 Results...!</h4>';
 						products.append(h4)
 					}
-
 					Swal.close();
 				}
 			})
@@ -144,7 +160,21 @@
 		loadProducts(searchValue)
 
 		$("#search").click(function() {
-			loadProducts($("#find").val())
+			var category = [],
+				gender = [],
+				search = $("#find").val(),
+				categories = $('.remove-category')
+				
+			categories.each(function(row) {
+				var button = categories[row]
+				if (button.getAttribute('category') === 'gender') {
+					gender.push(button.getAttribute('value-id'))
+				} else {
+					category.push(button.getAttribute('value-id'))
+				}
+			})
+
+			loadProducts(search, category, gender)
 		})
 
 	});

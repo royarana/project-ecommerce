@@ -15,6 +15,7 @@ Class Model extends Response {
 	private $_joins = [];
 	private $_select = null;
 	private $_limit = "";
+	public $_additional = "";
 
 	function __construct($tableName = "") {
 		global $CONFIG;
@@ -101,6 +102,7 @@ Class Model extends Response {
 		 $this->_joins = [];
 		 $this->_select = null;
 		 $this->_limit = "";
+		 $this->_additional = "";
 	}
 
 	function _setConnection() {
@@ -139,7 +141,8 @@ Class Model extends Response {
 	}
 
 	function where($col, $value, $operator = "=") {
-		$this->_where[] = array( "key" => "AND" , "value" => "{$col} ${operator} ?" );
+		$question = ($operator === "IN") ? '(?)' : '?';
+		$this->_where[] = array( "key" => "AND" , "value" => "{$col} ${operator} {$question}" );
 		$this->_values[] = $value;
 	}
 
@@ -149,7 +152,8 @@ Class Model extends Response {
 	}
 
 	function orWhere($col, $value, $operator = "=") {
-		$this->_where[] = array( "key" => "OR" , "value" => "{$col} ${operator} ?" );
+		$question = ($operator === "IN") ? '(?)' : '?';
+		$this->_where[] = array( "key" => "OR" , "value" => "{$col} ${operator} {$question}" );
 		$this->_values[] = $value;
 	}
 
@@ -194,7 +198,7 @@ Class Model extends Response {
 			}
 		}
 
-		$this->_select .= " {$joinStr} {$whereStr} {$this->_limit}";
+		$this->_select .= " {$joinStr} {$whereStr} {$this->_additional} {$this->_limit}";
 		$stmt = $this->_conn->prepare($this->_select);
 
 		//adds value

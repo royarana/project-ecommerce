@@ -29,7 +29,21 @@
                 $this->ProductsModel->search('description', $this->params["search"]);
             }
             
+
+            if(!empty($this->get)) {
+                if (isset($this->get["gender"])) {
+                    $gender = implode(",", $this->get["gender"]);
+                    $this->ProductsModel->where('gender', $gender, "IN");
+                }
+
+                if (isset($this->get["category"])) {
+                    $category = implode(",", $this->get["category"]);
+                    $this->ProductsModel->where('category_id', $category, "IN");
+                }
+            }
+            
             $models = $this->ProductsModel->getRows();
+
             $this->send(
                 $models,
                 "Products Retrieved Successfully...!"
