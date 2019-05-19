@@ -46,6 +46,22 @@
 			products = $("#products"),
 			page = 1
 
+		if(searchValue != "") {
+			$("#find").val(searchValue)
+		}
+
+		$('#demo1').pagination({
+			items: 0,
+			itemsOnPage: 8,
+			cssStyle: 'light-theme',
+			onPageClick: function(pageNumber) {
+				page = pageNumber
+				setTimeout(function (){
+					$("#search").trigger('click');
+				}, 100);
+			}
+		});
+
 		$.ajax({
 			url: API_URL('product/links'),
 			success: function(response) {
@@ -134,7 +150,6 @@
 			}
 
 			Swal.enableLoading();
-			alert();
 
 			$.ajax({
 				url: url,
@@ -144,18 +159,8 @@
 					var result = response.data,
 						data = result.data,
 						paginate = result.paginate
-						
-					$('#demo1').pagination({
-							items: paginate,
-							itemsOnPage: 8,
-							cssStyle: 'light-theme',
-							onPageClick: function(pageNumber) {
-								page = pageNumber
-								setTimeout(function (){
-									$("#search").trigger('click');
-								}, 100);
-							}
-					});
+
+					$('#demo1').pagination('updateItems', paginate);
 
 					if(data.length > 0) {
 						data.forEach(function(row) {

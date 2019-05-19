@@ -21,12 +21,9 @@
             $this->validationErr($rules, $this->params);
         }
 
-        function run() {
-            
+        function setData() {
             $this->ProductsModel->where('status', ACTIVE);
 
-            $this->ProductsModel->page($this->params["page"]);
-           
             if (isset($this->params['search'])) {
                 $this->ProductsModel->search('description', $this->params["search"]);
             }
@@ -42,10 +39,15 @@
                     $this->ProductsModel->where('category_id', $category, "IN");
                 }
             }
-            
-            $models = $this->ProductsModel->getRows();
-            $rowPaginate = $this->ProductsModel->countRows();
+        }
 
+        function run() {
+            $this->setData();
+            $this->ProductsModel->page($this->params["page"]);
+            $models = $this->ProductsModel->getRows();
+
+            $this->setData();
+            $rowPaginate = $this->ProductsModel->countRows();
             $models = array_merge(array("data" => $models), array("paginate"=> $rowPaginate));
 
             $this->send(

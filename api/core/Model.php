@@ -190,7 +190,6 @@ Class Model extends Response {
 		return $rows;
 	}
 
-	
 	function getRows() {
 		if ($this->_select === null) {
 			$this->select();
@@ -235,6 +234,7 @@ Class Model extends Response {
 		}
 
 		$this->clear();
+		
 		return $result;
 	}
 
