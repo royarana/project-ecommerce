@@ -66,8 +66,10 @@
 					pDesc.innerHTML = _100char(obj.info)
 					aBuy.append(buyIcon)
 					readMore.append(readIcon)
-					aBuy.className = "btn btn-primary mx-1"
-					readMore.className = "btn btn-success"
+					aBuy.setAttribute("barcode", obj.barcode)
+					aBuy.className = "btn btn-primary mx-1 buy-button"
+					readMore.setAttribute("barcode", obj.barcode)
+					readMore.className = "btn btn-success read-button"
 					aBuy.setAttribute('href', '#')
 
 					var buttonDiv = document.createElement('div')

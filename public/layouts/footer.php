@@ -79,6 +79,21 @@
 			}
 		})
 	}
+
+	$(document).on('click', '.buy-button', function() {
+		Swal.enableLoading();
+		var barcode = this.getAttribute('barcode')
+		alert(barcode)
+		Swal.fire({
+			type: 'info',
+			title: 'Buying Item ',
+			html: 
+				'<div class = "row pl-3">Quantity:</div>' +
+				'<input id="quantity" placeholder = "Quantity"  type = "text" class="swal2-input">' +
+				'<div class = "row pl-3">Total:</div>' +
+				'<input id="price" placeholder = "Total" type = "text" disabled class="swal2-input">',
+		})
+	})
 </script>
 </body>
 </html>
