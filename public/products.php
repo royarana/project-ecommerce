@@ -11,8 +11,8 @@
   <div>
 	<nav class="navbar navbar-light bg-light">
 	  <a class="navbar-brand">Welcome to JRO Inc.</a>
-	  <form class="form-inline">
-	    <input class="form-control mr-sm-2" type="search" id = "find" placeholder="Search" aria-label="Search">
+	  <form class="form-inline" id = "form-search">
+			<input class="form-control mr-sm-2" type="search" id = "find" placeholder="Search" aria-label="Search">
 	    <button class="btn btn-outline-success my-2 my-sm-0" id = "search" type="submit">Search</button>
 	  </form>
 	</nav>
@@ -26,54 +26,7 @@
 	<div class = "col-lg-2 mt-5 mb-5 text-center" id="container-product" >
 		<h4>PRODUCT CATEGORY</h4>
 		<hr>
-		<div>
-			<div class="dropdown">
-  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    GENDER
-  </button>
-  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">MEN</a>
-    <a class="dropdown-item" href="#">WOMEN</a>
-    <a class="dropdown-item" href="#">KIDS</a>
-  </div>
-</div>
-
-<div class="dropdown">
-  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    PRODUCT TYPE
-  </button>
-  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">SHOES</a>
-    <a class="dropdown-item" href="#">TRAINERS</a>
-    <a class="dropdown-item" href="#">SANDALS & FLIP FLOPS</a>
-    <a class="dropdown-item" href="#">SPORT SHOES</a>
-  </div>
-</div>
-
-<div class="dropdown">
-  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    SIZE
-  </button>
-  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton"">
-    <a class="dropdown-item" href="#">SMALL</a>
-    <a class="dropdown-item" href="#">MEDIUM</a>
-    <a class="dropdown-item" href="#">LARGE</a>
-    <a class="dropdown-item" href="#">EXTRA LARGE</a>
-  </div>
-</div>
-
-
-<div class="dropdown">
-  <button class="btn dropdown-toggle w-100 mb-2 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    FABRICATE
-  </button>
-  <div class="dropdown-menu text-right drop-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">LEATHER</a>
-    <a class="dropdown-item" href="#">FABRIC</a>
-    <a class="dropdown-item" href="#">RUBBER</a>
-  </div>
-</div>
-
+		<div id = "product-links">
 		</div>
 	</div>
 	<!-- END OF DROPDOWN -->
@@ -92,6 +45,73 @@
 			searchValue = queryString.has('search') ? queryString.get('search') : "",
 			products = $("#products"),
 			page = 1
+
+
+		$.ajax({
+			url: API_URL('proudct/links'),
+			success: function(response) {
+				var data = response.data,
+					links = Object.keys(data)
+
+				links.forEach(function(row) {
+					var link = data[row],
+						div = document.createElement('div'),
+						button = document.createElement('button'),
+						dropdown_menu = document.createElement('div')
+
+
+					div.className = "dropdown"
+					dropdown_menu.className = "dropdown-menu text-right drop-menu"
+					dropdown_menu.setAttribute('aria-labelledby', 'dropdownMenuButton')
+
+					button.innerHTML = row
+					button.className = "btn dropdown-toggle w-100 mb-2 text-right"
+
+					button.setAttribute("id", "dropdownMenuButton")
+					button.setAttribute("data-toggle", 'dropdown')
+					button.setAttribute("aria-haspopup", 'true')
+					button.setAttribute("aria-expanded", 'false')
+					div.append(button)
+
+					link.forEach(function(value) {
+						var a = document.createElement('a')
+						a.className = "dropdown-item search-category"
+						a.setAttribute('category', row.toLowerCase())
+						a.innerHTML = (value.description)
+						dropdown_menu.append(a)
+					})
+
+					div.append(dropdown_menu)
+					$("#product-links").append(div)
+				})
+				
+			}
+		})
+
+		$("body").on('click', '.search-category', function(event) {
+			var categories = $('.remove-category'),
+				textCategory = this.innerHTML
+
+			categories.each(function(row) {
+				var button = categories[row]
+				if (button.getAttribute("category") === textCategory) {
+					removeCategory($(button))
+					return false;
+				}
+			})
+
+			var label = '<label class = "mr-3 p-1 text-white border border-white"> ' + textCategory + ' <button category = "'+textCategory+'" type = "button" class = "btn-sm btn btn-danger ml-1 remove-category">X</button> </label>'
+			$("#form-search").prepend(label)
+		})
+
+		$("body").on('click', '.remove-category', function(event) {
+				removeCategory($(this))
+		})
+
+		function removeCategory(obj) {
+			console.log(obj)
+			obj.parent().remove()
+		}
 
 		function loadProducts(search = "") {
 			Swal.enableLoading();
