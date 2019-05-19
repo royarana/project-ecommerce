@@ -11,10 +11,10 @@
         }
 
         function sanitazion() {
+            
             $rules = array(
                 'token' => 'required'
             );
-
             $this->validationErr($rules, $this->get);
         }
 
