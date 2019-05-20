@@ -11,6 +11,7 @@ create table users (
     birthday date not null,
     gender varchar(1) not null,
     password varchar(100) not null,
+    type int(1) not null default 0,
     date_created datetime not null default now(),
     date_updated datetime not null default now() ON UPDATE CURRENT_TIMESTAMP
 );
@@ -74,6 +75,7 @@ create table carts (
     total_price decimal(19,4),
     address text not null,
     date_created datetime not null default now(),
+    status int(1) default 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

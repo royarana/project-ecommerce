@@ -2,7 +2,8 @@
 
     require API_SERVICE;
     require MODELS."ProductModel.php";
-    
+    require_once SERVICE_FOLDER."UserService/CheckAdmin.php";
+
 	class GetProduct extends Controller {
         
 		function __construct($body, $params, $get) {
@@ -21,12 +22,22 @@
             $this->validationErr($rules, $this->params);
         }
 
+        function middleware() {
+            if (isset($_GET["token"])) {
+                CheckAdmin($_GET["token"]);
+            }
+        }
+
         function setData() {
-            $this->ProductsModel->where('status', ACTIVE);
+            if (!isset($_GET["token"])) {
+                $this->ProductsModel->where('status', ACTIVE);
+            }
 
             if (isset($this->params['search'])) {
                 $this->ProductsModel->search('description', $this->params["search"]);
             }
+
+            $this->ProductsModel->join('categories', 'categories.id' , 'products.category_id');
             
             if(!empty($this->get)) {
                 if (isset($this->get["gender"])) {
@@ -43,6 +54,7 @@
 
         function run() {
             $this->setData();
+            $this->ProductsModel->select('products.*, categories.description as category_description');
             $this->ProductsModel->page($this->params["page"]);
             $models = $this->ProductsModel->getRows();
 

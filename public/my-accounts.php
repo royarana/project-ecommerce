@@ -106,7 +106,19 @@
 
                             trans.innerHTML = row.id
                             price.innerHTML = formatMoney(row.total_price)
+
                             status.innerHTML = 'Pending'
+                            
+                            if(row.status === 1) {
+                                status.innerHTML = 'Pending'
+                            } else if (row.status === 2) {
+                                status.innerHTML = 'Delivering'
+                            } else if (row.status === 3) {
+                                status.innerHTML = 'Delivered'
+                            } else if (row.status === 4) {
+                                status.innerHTML = 'Cancelled'
+                            }
+
                             date.innerHTML = moment(row.date_created).format('MMMM Do YYYY, h:mm:ss a')
                             address.innerHTML = row.address
 
