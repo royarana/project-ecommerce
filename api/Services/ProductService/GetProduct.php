@@ -38,6 +38,7 @@
             }
 
             $this->ProductsModel->join('categories', 'categories.id' , 'products.category_id');
+            $this->ProductsModel->leftJoin('featured', 'featured.product_id' , 'products.id');
             
             if(!empty($this->get)) {
                 if (isset($this->get["gender"])) {
@@ -54,7 +55,7 @@
 
         function run() {
             $this->setData();
-            $this->ProductsModel->select('products.*, categories.description as category_description');
+            $this->ProductsModel->select('products.*, categories.description as category_description, featured.product_id as featured');
             $this->ProductsModel->page($this->params["page"]);
             $models = $this->ProductsModel->getRows();
 

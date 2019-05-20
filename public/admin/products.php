@@ -264,7 +264,7 @@
                         data.append("inventory",obj.inventory);
                         data.append("gender",obj.gender_id);
                         data.append("category_id", parseInt(obj.category_id));
-                        
+
                         $.ajax({
                             method: "POST",
                             contentType: false,
@@ -283,7 +283,31 @@
             $('#add-product').click(function() {
                 picture = {}
                 loadForm();
-            })   
+            })
+
+            $(document).on('click', '.featured', function() {
+              var product_id = this.getAttribute('product-id'),
+                featured = this.innerHTML,
+                url = (featured === 'SET FEATURED') ? 'product/featured/add' : 'product/featured/remove'
+
+              Swal.fire('Processing...!')
+
+              $.ajax({
+                url: API_URL(url),
+                method: "POST",
+                dataType: 'json',
+                data: {
+                  barcode: product_id,
+                  token: admin["token"]
+                },
+                success: function(response) {
+                  success(response.message, function() { location.reload() })
+                },
+                error: function(response) {
+                  console.log(response)
+                }
+              })
+            })
             
             $('#demo1').pagination({
                 items: 0,
@@ -348,6 +372,7 @@
                                 ,statusTd = document.createElement('td')
                                 ,statusButton = document.createElement('button')
                                 ,editButton = document.createElement('button')
+                                ,featuredButton = document.createElement('button')
                                 
                             picImg.setAttribute('src', row.picture)
                             picImg.className = 'picture-show mt-2'
@@ -356,6 +381,10 @@
                             editButton.innerHTML = "EDIT"
                             editButton.className = "btn btn-success mr-1"
                             editButton.setAttribute('product-info', JSON.stringify(row))
+
+                            featuredButton.innerHTML = (row.featured === null) ? 'SET FEATURED' : 'UNFEATURED'
+                            featuredButton.setAttribute('product-id', row.barcode)
+                            featuredButton.className = (row.featured === null) ? 'btn btn-success mx-1 featured' : 'featured btn btn-danger mx-1'
 
                             if (row.status) {
                                 statusButton.innerHTML = "DE-ACTIVATE"
@@ -374,7 +403,7 @@
                                 invLbl = document.createElement('label'),
                                 category = document.createElement('label'),
                                 gender = document.createElement('label'),
-                                status = document.createElement('label')
+                                status = document.createElement('h6')
 
                             infoLbl.innerHTML = "Info: " +row.info
                             infoLbl.className = "row ml-1 mt-1 text-dark"
@@ -397,7 +426,6 @@
                             statusLabel.innerHTML = (row.status) ? "Active" : "Inactive"
 
                             status.append(statusLabel)
-                            status.className = "row ml-1 mt-1 text-dark"
 
                             picture.append(infoLbl)
                             
@@ -407,8 +435,15 @@
                             info.append(gender)
                             info.append(status)
 
+                            var featured = document.createElement('h6')
+
+                            featured.innerHTML = (row.featured === null) ? 'UN FEATURED' : 'FEATURED'
+                            featured.className = (row.featured !== null) ? "badge badge-success text-white" : "text-white badge badge-danger"
+                            info.append(featured)
+
                             statusTd.append(editButton)
                             statusTd.append(statusButton)
+                            statusTd.append(featuredButton)
 
                             tr.append(picture)
                             tr.append(info)
