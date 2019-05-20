@@ -41,7 +41,7 @@
 		}
 
 		window.getCartItems = function () {
-			if (window.user.token) {
+			if (window.user) {
 				console.log('Retrieving Items')
 				$.ajax({
 					url: API_URL('cart?token='+window.user.token),
@@ -79,7 +79,7 @@
 		}
 
 		window.showCartItems = function () {
-			if (window.user.token) {
+			if (window.user) {
 				Swal.enableLoading();
 				$.ajax({
 					url: API_URL('cart?token='+window.user.token),

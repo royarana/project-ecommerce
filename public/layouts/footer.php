@@ -90,19 +90,20 @@
 			type: 'info',
 			html:
 				'<div class = "row pl-3">Username:</div>' +
-				'<input id="username" placeholder = "Username" type = "text" class="swal2-input">' +
+				'<input id="user-email" placeholder = "Username" type = "text" class="swal2-input">' +
 				'<div class = "row pl-3">Password:</div>' +
 				'<input id="password" placeholder = "Username" type = "password" class="swal2-input">',
 			cancelButtonColor: '#d33',
 			showCancelButton: true
 		}).then((result) => {
 			if (result.value) {
-				var username = $("#username").val(),
+				var username = $("#user-email").val(),
 				password = $("#password").val(),
 				data = {
 						email: username,
 						password: password
 				}
+				
 				Swal.enableLoading();
 
 				$.ajax({
@@ -139,7 +140,7 @@
 			token: window.user.token
 		}
 		
-		if (!window.user.token) {
+		if (!window.user) {
 			Swal.fire('Error..!', "Login First Before Buying an Item", "error")
 			return
 		}
