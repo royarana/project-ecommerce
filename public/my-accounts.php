@@ -53,7 +53,28 @@
                             id: transId
                         },
                         success: function(response) {
-                            console.log(response)
+                            var items = response.data
+						    var body = "",
+							thead = "<thead><tr><th>Desc</th><th>Price</th><th>Qty</th><th>Total</th><th>Status</th></tr></thead>"
+							itemTotal = 0
+
+                            items.forEach(function(row) {
+                                var total = (row.price * row.quantity),
+                                    status = (row.status) ? '<span class="badge badge-success">Buy</span>' : '<span class="badge badge-danger">Cancelled</span>'
+                                
+                                    if (row.status) {
+                                    itemTotal += total
+                                }
+                                body += "<tr><td class = 'text-left'>"+row.description+"</td><td class = 'text-right'>"+formatMoney(row.price)+"</td><td class = 'text-right'>"+row.quantity+"</td><td class = 'text-right'>"+formatMoney(total)+"</td><td>"+status+"</td></tr>"
+                            })
+                            
+                            Swal.fire({
+                                title: "Cart Items",
+                                type: 'info',
+                                customClass: 'swal-wide',
+                                confirmButtonText: "Close",
+                                html: "<table class = 'w-100 table'>"+thead+body+"</table><br><div class = 'row text-right'></div>"
+                            })
                         },
                         error: function(response) {
                             console.log(response)
@@ -86,7 +107,7 @@
                             trans.innerHTML = row.id
                             price.innerHTML = formatMoney(row.total_price)
                             status.innerHTML = 'Pending'
-                            date.innerHTML = row.date_created
+                            date.innerHTML = moment(row.date_created).format('MMMM Do YYYY, h:mm:ss a')
                             address.innerHTML = row.address
 
                             button.className = "btn btn-primary btn-sm search"
