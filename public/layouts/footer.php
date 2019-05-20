@@ -116,7 +116,9 @@
 					url: API_URL('user/login'),
 					success: function(response) {
 						localStorage.setItem('user', JSON.stringify(response.data))
-						success(response.message, location.reload)
+						success(response.message, function() {
+							location.reload();
+						})
 					},
 					error: errorAjax
 				})

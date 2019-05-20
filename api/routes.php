@@ -17,7 +17,9 @@
 		"api/product/list/:page/:search" => "GET ProductService/GetProduct",
 		"api/cart/item/add" => "POST CartService/AddItem",
 		"api/cart/item/remove" => "POST CartService/RemoveItem",
+		"api/cart/trans-item" => "GET CartService/GetItemsByTrans",
 		"api/cart/checkout" => "GET CartService/ProcessItems",
+		"api/cart/transactions" => "GET CartService/CartTransactions",
 		"api/cart" => "GET CartService/CartItems"
 	);
 ?>
