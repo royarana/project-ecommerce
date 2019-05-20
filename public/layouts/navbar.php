@@ -191,9 +191,13 @@
 					var genderLbl = document.createElement('label')
 					genderLbl.innerHTML = 'Gender: '+ (obj.gender) + "</br>"
 
+					var inventoryLbl = document.createElement('label')
+					inventoryLbl.innerHTML = 'Stocks: '+ (obj.inventory).replace(".0000", "") + " Items Left</br>"
+
 					pDesc.append(priceLbl)
 					pDesc.append(categoryLbl)
 					pDesc.append(genderLbl)
+					pDesc.append(inventoryLbl)
 
 					aBuy.append(buyIcon)
 					readMore.append(readIcon)
@@ -202,7 +206,7 @@
 					readMore.setAttribute("barcode", obj.barcode)
 					readMore.className = "btn btn-success read-button"
 					readMore.setAttribute("product-info", JSON.stringify(obj))
-					
+
 					aBuy.setAttribute('href', '#')
 
 					var buttonDiv = document.createElement('div')

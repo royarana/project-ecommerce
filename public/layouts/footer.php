@@ -67,9 +67,19 @@
 	$(document).on('click', '.read-button', function(event) {
 		var obj = JSON.parse(this.getAttribute('product-info'))
 
+		var html = "";
+		html += "<div class = 'row'><div class = 'col-lg-12 text-center'><img src = '"+obj.picture+"'  class ='show-img border border-grey'/></div></div>";
+		html += "<div class = 'row'><div class = 'col-lg-12 text-left mt-5'><label ><b>Desc:</b> "+obj.description+"</label></div></div>";
+		html +=  "<div class = 'row'><div class = 'col-lg-12 text-left'><label ><b>Info:</b> "+obj.info+"</label></div></div>";
+		html +=  "<div class = 'row'><div class = 'col-lg-12 text-left'><label ><b>Price:</b> "+formatMoney(obj.price)+"</label></div></div>";
+		html +=  "<div class = 'row'><div class = 'col-lg-12 text-left'><label ><b>Brand:</b> "+(obj.category_description)+"</label></div></div>";
+		html +=  "<div class = 'row'><div class = 'col-lg-12 text-left'><label ><b>Gender:</b> "+(obj.gender)+"</label></div></div>";
+		html +=  "<div class = 'row'><div class = 'col-lg-12 text-left'><label ><b>Stocks:</b> "+(obj.inventory).replace(".0000", "")+" Items Left...!</label></div></div>";
+
 		Swal.fire({
-			title: 'Product Info for ' + obj.description,
-			type: 'info'
+			title: 'Product Info',
+			type: 'info',
+			html: html
 		})
 	})
 
