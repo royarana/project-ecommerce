@@ -7,7 +7,7 @@ require_once SITE_ROOT."/api/Libraries/constants.php";
 
 Class Model extends Response {
 	private $_columns = [];
-	private $_conn;
+	public $_conn;
 	private $_connString;
 	public  $_table;
 	private $_where = [];

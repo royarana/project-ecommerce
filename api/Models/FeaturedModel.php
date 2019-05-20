@@ -14,10 +14,9 @@
         }
 
         function removeFeatured($id) {
-            $this->where("product_id", $id);
-            $this->where("status", ACTIVE);
-            $res = $this->getOne();
-            $this->inactive($res["id"]);
+            $sql = "DELETE FROM FEATURED where product_id =".$id;
+            $stmt = $this->_conn->prepare($sql);
+            return $stmt->execute();
         }
     }
     
