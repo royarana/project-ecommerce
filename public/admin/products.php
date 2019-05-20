@@ -98,7 +98,14 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> Products Table</h4>
+                <div class = "row">
+                    <div class = "col-lg-6">
+                        <h4 class="card-title"> Products Table</h4>
+                    </div>
+                    <div class = "col-lg-6 text-right">
+                        <button id = "add-product" class = "btn btn-primary">ADD</button>
+                    </div>
+                </div>
               </div>
               <div class="card-body">
                   <div class = "row">
@@ -116,7 +123,6 @@
                       </th>
                     </thead>
                     <tbody id = "products">
-                        <tr><td>dsadsa</td><td>dsadsa</td><td>dsadsa</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -165,8 +171,96 @@
       function loadAdmin(admin) {
         $(document).ready(function() {
             var page = 1,
-                products = $("#products")
+                products = $("#products"),
+                product_links = {}
 
+            $.ajax({
+                url: API_URL('product/links'),
+                success: function(response) {
+                    product_links = response.data
+                }
+            })
+
+            var picture = {}
+            $(document ).on('change','#picture' , function(e){
+                picture = e.target.files[0]
+             });
+
+            $('#add-product').click(function() {
+                picture = {}
+                var htmlForm = "<input type = 'text' placeholder = 'Barcode' class = 'form-control mb-1' id = 'barcode'>";
+                    htmlForm += "<input type = 'text' placeholder = 'Description' class = 'form-control mb-1' id = 'description'>";
+                    htmlForm += "<input type = 'text' placeholder = 'Info' class = 'form-control mb-1' id = 'info'>";
+                    htmlForm += "<input type = 'number' placeholder = 'Price' class = 'form-control mb-1' id = 'price'>";
+                    htmlForm += "<input type = 'number' placeholder = 'Inventory' class = 'form-control mb-1' id = 'inventory'>";
+                    htmlForm += "<input type = 'file' multiple accept='image/*' placeholder = 'Picture' class = 'form-control mb-1' id = 'picture'>";
+                 
+                var genderOption = "",
+                    categoryOption = ""
+
+                    product_links.Gender.forEach(function(row) {
+                        genderOption += '<option value = "'+row.gender+'">'+row.description+'</option>'
+                    })
+
+                    product_links.Categories.forEach(function(row) {
+                        categoryOption += '<option value = "'+row.id+'">'+row.description+'</option>'
+                    })
+                
+                htmlForm += "<select id = 'gender' class = 'form-control' >"+genderOption+"</select>"
+                htmlForm += "<select id = 'category' class = 'form-control' >"+categoryOption+"</select>"
+
+                Swal.fire({
+                    title: "Add Product",
+                    type: "info",
+                    html: htmlForm,
+                    showCancelButton: true
+                }).then(function(result) {
+                    if (result.value) {
+                        var barcode = $('#barcode').val(),
+                        description = $('#description').val(),
+                        info = $('#info').val(),
+                        price = $('#price').val(),
+                        inventory = $('#inventory').val(),
+                        gender = $("#gender").children(":selected").attr("value"),
+                        category = $("#category").children(":selected").attr("value")
+                    
+                        var obj = {
+                            barcode: barcode,
+                            description: description,
+                            info: info,
+                            price: price,
+                            inventory: inventory,
+                            gender_id: gender,
+                            category_id: category,
+                            picture: picture
+                        }
+
+                        var data = new FormData();
+                        data.append("picture", picture);
+                        data.append("price", price);
+                        data.append("token", admin["token"]);
+                        data.append("barcode",obj.barcode);
+                        data.append("description",obj.description);
+                        data.append("info",obj.info);
+                        data.append("inventory",obj.inventory);
+                        data.append("gender",obj.gender_id);
+                        data.append("category_id", parseInt(obj.category_id));
+                        
+                        $.ajax({
+                            method: "POST",
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            url: API_URL('product'),
+                            success: function(response) {
+                                success(response.message, function() { location.reload() })
+                            },
+                            error: errorAjax
+                        })
+                    }
+                })
+            })   
+            
             $('#demo1').pagination({
                 items: 0,
                 itemsOnPage: 8,

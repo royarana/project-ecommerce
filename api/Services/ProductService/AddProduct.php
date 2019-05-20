@@ -19,7 +19,11 @@
                 'barcode'    => 'required|max_len,100|min_len,6',
                 'picture' => 'required_file|extension,png;jpg;jpeg',
                 'price' => 'required|numeric',
-                'token' => 'required'
+                'token' => 'required',
+                'category_id' => 'required',
+                'gender' => 'required',
+                'inventory' => 'required',
+                'info' => 'required'
             );
             
             $this->validationErr($rules);
@@ -32,8 +36,9 @@
         function run() {
             $create = $this->body;
             unset($create["token"]);
-
-            $type = end(explode(".", $create["picture"]['name']));
+            
+            $type = explode(".", $create["picture"]['name']);
+            $type = end($type);
             $file_name = sha1($create["picture"]['name'].uniqid()).".".$type;
             $file_size = $create["picture"]['size'];
             $file_tmp = $create["picture"]['tmp_name'];
@@ -50,6 +55,7 @@
             }
 
             if (move_uploaded_file($file_tmp, $directory)) {
+                $create["picture"] = PUBLIC_FOLDER."uploads/".$file_name;
                 $models = $this->ProductsModel->create($create);
                 $this->send(
                     $models,
