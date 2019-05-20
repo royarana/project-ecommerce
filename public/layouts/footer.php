@@ -64,13 +64,22 @@
 		showCartItems()
 	})
 
+	$(document).on('click', '.read-button', function(event) {
+		var obj = JSON.parse(this.getAttribute('product-info'))
+
+		Swal.fire({
+			title: 'Product Info for ' + obj.description,
+			type: 'info'
+		})
+	})
+
 	$(document).on('click', '.remove-cart-item', function() {
 		var button = this,
 			id = this.getAttribute('item-id'),
 			token = (window.user) ? window.user["token"] : null
 		
 		Swal.fire({
-			title:'Delete Item', text:'Are You Sure To Delete This Item?', icon:'warning',
+			title:'Delete Item', text:'Are You Sure To Delete This Item?', type: 'question',
 			showCancelButton: true,
 			cancelButtonColor: '#d33',
 		}).then(function(result) {
@@ -86,9 +95,9 @@
 					},
 					success: function(response) {
 						Swal.fire({
-							text: 'Success...!',
-							icon: 'success',
-							title: response.message
+							title: 'Success...!',
+							type: 'success',
+							text: response.message
 						}).then(function() {
 							location.reload()
 						})

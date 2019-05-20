@@ -24,7 +24,7 @@
 		}
 
 		window._100char = function(string) {
-			return string.substr(0,100) 
+			return string.substr(0,50) 
 		}
 
 		window.errorAjax = function(response) {
@@ -179,13 +179,30 @@
 					cardTitle.className = "card-title"
 					cardTitle.innerHTML = obj.description
 					pDesc.className = "card-text"
-					pDesc.innerHTML = _100char(obj.info)
+					var description = document.createElement('label')
+					description.innerHTML = 'Desc: ' + _100char(obj.info) + "..."
+					pDesc.append(description)
+					var priceLbl = document.createElement('label')
+					priceLbl.innerHTML = 'Price: '+ formatMoney(obj.price) + "</br>"
+
+					var categoryLbl = document.createElement('label')
+					categoryLbl.innerHTML = 'Category / Brand: '+ (obj.category_description) + "</br>"
+					
+					var genderLbl = document.createElement('label')
+					genderLbl.innerHTML = 'Gender: '+ (obj.gender) + "</br>"
+
+					pDesc.append(priceLbl)
+					pDesc.append(categoryLbl)
+					pDesc.append(genderLbl)
+
 					aBuy.append(buyIcon)
 					readMore.append(readIcon)
 					aBuy.setAttribute("barcode", obj.barcode)
 					aBuy.className = "btn btn-primary mx-1 buy-button"
 					readMore.setAttribute("barcode", obj.barcode)
 					readMore.className = "btn btn-success read-button"
+					readMore.setAttribute("product-info", JSON.stringify(obj))
+					
 					aBuy.setAttribute('href', '#')
 
 					var buttonDiv = document.createElement('div')
