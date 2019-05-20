@@ -24,6 +24,7 @@
 
         function run() {
             $this->CartsModel->_orderBy = " ORDER BY ID DESC";
+            $this->CartsModel->where('user_id', $this->body['user']['id']);
             $items = $this->CartsModel->getRows();
 
             $this->send(

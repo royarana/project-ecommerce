@@ -48,6 +48,8 @@
 		$('#username').html("Hi " + window.user["full_name"])
 		$('.login').hide();
 		$('.logout').show();
+		$('#account').removeClass('d-none')
+		$('#checkout').removeClass('d-none')
 	} else {
 		$('.login').show();
 		$('.logout').hide();
@@ -58,6 +60,12 @@
 	$('#login').click(function(event) {
 		event.preventDefault();
 		login()
+	})
+
+	$('#logout').click(function(event) {
+		event.preventDefault();
+		localStorage.removeItem('user')
+		location.reload()
 	})
 
 	$('#checkout').click(function(event) {
