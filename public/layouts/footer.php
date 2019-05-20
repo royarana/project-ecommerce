@@ -194,6 +194,65 @@
 		})
 	}
 
+	$('#register').click(function(event){
+		event.preventDefault()
+
+		var html =
+				'<div class = "row pl-3">Email:</div>' +
+				'<input id="user-email" placeholder = "Email" type = "email" class="swal2-input">' +
+				'<div class = "row pl-3">Full Name:</div>' +
+				'<input id="fullname" placeholder = "Full Name" type = "text" class="swal2-input">' +
+				'<div class = "row pl-3">Password:</div>' +
+				'<input id="password" placeholder = "Password" type = "password" class="swal2-input">'+
+				'<div class = "row pl-3">Gender:</div>' +
+				'<select id = "gender" class = "swal2-input"><option value = "F">FEMALE</option><option value = "M">MALE</option></select>'+
+				'<div class = "row pl-3">Birthdate:</div>' +
+				'<input id="date" placeholder = "Birthdate" type = "date" class="swal2-input">'
+
+		Swal.fire({
+			title: "Registration",
+			html: html,
+			icon: 'info',
+			showCancelButton: true,
+			cancelButtonColor: "#d33"
+		}).then(function(result) {
+			if (result.value) {
+				var user = $('#user-email').val()
+				var password = $('#password').val()
+				var fullname = $('#fullname').val()
+				var date = $('#date').val()
+				var gender = $( "#gender option:selected" ).val()
+
+				var data= {
+					email: user,
+					password: password,
+					full_name: fullname,
+					birthday: date,
+					gender: gender
+				}
+				/*
+'full_name'    => 'required|max_len,100|min_len,6',
+                'password'    => 'required|max_len,100|min_len,6',
+                'gender' => 'required|max_len,1|contains,M F',
+                'birthday' => 'required|date',
+                'email' => 'required|valid_email'
+				*/
+				$.ajax({
+					url: API_URL('user'),
+					method: 'POST',
+					dataType: 'json',
+					data:data,
+					success: function(response) {
+						success(response.message)
+					},
+					error: function(response) {
+						console.log(response)
+					}
+				})
+			}
+		})
+	})
+
 	$(document).on('click', '.buy-button', function() {
 		Swal.enableLoading();
 		var barcode = this.getAttribute('barcode')

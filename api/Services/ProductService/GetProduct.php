@@ -30,11 +30,11 @@
 
         function setData() {
             if (!isset($_GET["token"])) {
-                $this->ProductsModel->where('status', ACTIVE);
+                $this->ProductsModel->where('products.status', ACTIVE);
             }
 
             if (isset($this->params['search'])) {
-                $this->ProductsModel->search('description', $this->params["search"]);
+                $this->ProductsModel->search('products.description', $this->params["search"]);
             }
 
             $this->ProductsModel->join('categories', 'categories.id' , 'products.category_id');
@@ -48,7 +48,7 @@
 
                 if (isset($this->get["category"])) {
                     $category = implode(",", $this->get["category"]);
-                    $this->ProductsModel->where('category_id', $category, "IN");
+                    $this->ProductsModel->where('products.category_id', $category, "IN");
                 }
             }
         }

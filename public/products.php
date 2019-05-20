@@ -147,7 +147,7 @@
 				url: url,
 				data: search,
 				success: function(response) {
-					
+					console.log(response)
 					var result = response.data,
 						data = result.data,
 						paginate = result.paginate
