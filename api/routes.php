@@ -7,7 +7,7 @@
 		"api/product" => "POST ProductService/AddProduct",
 		"api/product/barcode/:barcode" => "GET ProductService/ReadProduct",
 		"api/product/links" => "GET ProductService/ProductLink",
-		"api/product/edit/:id" => "POST ProductService/EditProduct",
+		"api/product/edit-prod/:id" => "POST ProductService/EditProduct",
 		"api/product/active" => "POST ProductService/ActiveProduct",
 		"api/product/inactive" => "POST ProductService/InactiveProduct",
 		"api/product/featured/add" => "PUT ProductService/AddFeatured",

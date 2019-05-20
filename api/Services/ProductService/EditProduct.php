@@ -12,13 +12,17 @@
         }
 
         function sanitazion() {
-            $this->body = array_merge($_FILES, $_POST, $this->params);
+            $array = array_merge($_FILES, $_POST, $this->params);
             
             $rules = array(
                 'description'    => 'required|max_len,100|min_len,6',
                 'barcode'    => 'required|max_len,100|min_len,6',
                 'price' => 'required|numeric',
                 'token' => 'required',
+                'category_id' => 'required',
+                'gender' => 'required',
+                'inventory' => 'required',
+                'info' => 'required',
                 'id' => 'required'
             );
             
@@ -26,13 +30,13 @@
                 $rules['picture'] ='required_file|extension,png;jpg;jpeg';
             }
 
-            $this->validationErr($rules);
+            $this->validationErr($rules, $array);
         }
 
         function middleware() {
             checkLogin($this->body['token']);
 
-            $this->ProductsModel->where('id', $this->body['id']);
+            $this->ProductsModel->where('id', $this->params['id']);
             $res = $this->ProductsModel->getOne();
 
             if (empty($res)) {
@@ -46,11 +50,13 @@
 
         function run() {
             $update = $this->body;
+
             unset($update["token"]);
             unset($update["id"]);
 
             if (isset($update["picture"])) {
-                $type = end(explode(".", $update["picture"]['name']));
+                $type = explode(".", $update["picture"]['name']);
+                $type = end($type);
                 $file_name = sha1($update["picture"]['name'].uniqid()).".".$type;
                 $file_size = $update["picture"]['size'];
                 $file_tmp = $update["picture"]['tmp_name'];
@@ -67,6 +73,7 @@
                 }
 
                 if (move_uploaded_file($file_tmp, $directory)) {
+                    $update["picture"] = PUBLIC_FOLDER."uploads/".$file_name;
                     $this->ProductsModel->where('id', $this->body['id']);
                     $models = $this->ProductsModel->update($update);
                     $this->send(

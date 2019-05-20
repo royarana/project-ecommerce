@@ -186,9 +186,8 @@
                 picture = e.target.files[0]
              });
 
-            $('#add-product').click(function() {
-                picture = {}
-                var htmlForm = "<input type = 'text' placeholder = 'Barcode' class = 'form-control mb-1' id = 'barcode'>";
+            function loadForm(rowObj = null) {
+              var htmlForm = "<input type = 'text' placeholder = 'Barcode' class = 'form-control mb-1' id = 'barcode'>";
                     htmlForm += "<input type = 'text' placeholder = 'Description' class = 'form-control mb-1' id = 'description'>";
                     htmlForm += "<input type = 'text' placeholder = 'Info' class = 'form-control mb-1' id = 'info'>";
                     htmlForm += "<input type = 'number' placeholder = 'Price' class = 'form-control mb-1' id = 'price'>";
@@ -209,8 +208,24 @@
                 htmlForm += "<select id = 'gender' class = 'form-control' >"+genderOption+"</select>"
                 htmlForm += "<select id = 'category' class = 'form-control' >"+categoryOption+"</select>"
 
+                var title = (rowObj === null) ? "Add " : "Edit "
+                var url = (rowObj === null) ? "product" : "product/edit-prod/" + rowObj.id
+
+                if (rowObj !== null) {
+                  setTimeout(function() {
+                    $('#barcode').val(rowObj.barcode)
+                     $('#description').val(rowObj.description)
+                      $('#info').val(rowObj.info)
+                       $('#price').val(rowObj.price)
+                        $('#inventory').val(rowObj.inventory)
+
+                       $('#gender').val(rowObj.gender)
+                       $('#category').val(rowObj.category_id)
+                  }, 100)
+                }
+
                 Swal.fire({
-                    title: "Add Product",
+                    title: title+"Product",
                     type: "info",
                     html: htmlForm,
                     showCancelButton: true
@@ -231,10 +246,14 @@
                             price: price,
                             inventory: inventory,
                             gender_id: gender,
-                            category_id: category,
-                            picture: picture
+                            category_id: category
                         }
 
+                        if (picture) {
+                          obj.picture = picture
+                        }
+
+                        
                         var data = new FormData();
                         data.append("picture", picture);
                         data.append("price", price);
@@ -251,7 +270,7 @@
                             contentType: false,
                             processData: false,
                             data: data,
-                            url: API_URL('product'),
+                            url: API_URL(url),
                             success: function(response) {
                                 success(response.message, function() { location.reload() })
                             },
@@ -259,6 +278,11 @@
                         })
                     }
                 })
+            }
+
+            $('#add-product').click(function() {
+                picture = {}
+                loadForm();
             })   
             
             $('#demo1').pagination({
@@ -275,6 +299,11 @@
 
             $("#search").click(function() {
                 loadProducts();
+            })
+
+            $(document).on('click', '.mr-1', function(event) {
+              var productInfo = JSON.parse(this.getAttribute('product-info'))
+              loadForm(productInfo)
             })
 
             function loadProducts(search = "", category= [], gender = []) {
@@ -308,7 +337,6 @@
                             data = result.data,
                             paginate = result.paginate
 
-                        console.log(paginate)
                         $('#demo1').pagination('updateItems', paginate);
 
                         data.forEach(function(row) {
@@ -327,6 +355,7 @@
                             picture.append(picImg)
                             editButton.innerHTML = "EDIT"
                             editButton.className = "btn btn-success mr-1"
+                            editButton.setAttribute('product-info', JSON.stringify(row))
 
                             if (row.status) {
                                 statusButton.innerHTML = "DE-ACTIVATE"
