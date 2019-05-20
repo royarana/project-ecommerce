@@ -9,6 +9,12 @@
 </head>
 <script>
 	(function() {
+		window.user = localStorage.getItem('user')
+
+		if (window.user) {
+			window.user = JSON.parse(user)
+		}
+
 		window.API_URL = function(url) {
 			return "http://localhost/project-ecommerce/index.php/api/" + url
 		}
@@ -41,7 +47,7 @@
 		}
 
 		window.getCartItems = function () {
-			if (window.user) {
+			if (window.user.token) {
 				console.log('Retrieving Items')
 				$.ajax({
 					url: API_URL('cart?token='+window.user.token),
@@ -79,7 +85,7 @@
 		}
 
 		window.showCartItems = function () {
-			if (window.user) {
+			if (window.user.token) {
 				Swal.enableLoading();
 				$.ajax({
 					url: API_URL('cart?token='+window.user.token),
@@ -216,7 +222,7 @@
 		  	<div class=" d-flex justify-content-end">
 		  		<div>
 			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			    <div class="navbar-nav" id="nav-my-account" >
+			    <div class="navbar-nav" id="nav-my-account" style="font-family: 'Niconne', cursive;">
 			      <a id="account" class="nav-item nav-link" href="#">MY ACCOUNT </a>
 						<a id="checkout" class="nav-item nav-link" href="#">CHECKOUT <span id = 'checkout-items' class = "d-none px-2 border border-info">4</span> </a>
 						

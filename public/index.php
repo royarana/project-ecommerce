@@ -3,6 +3,7 @@
 	<?php 
 		include './layouts/navbar.php';
 	?>
+<link href="https://fonts.googleapis.com/css?family=Bree+Serif|Oleo+Script&display=swap" rel="stylesheet">
 <!-- carousel -->
 <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel" >
   <ol class="carousel-indicators" id = "carousel-num">
@@ -30,17 +31,19 @@
 ?>
 
 <!-- FEATURE -->
+<hr>
 
-<div class="card bg-dark text-white mb-5">
-  <img src="images/carousel10.jpg" class="card-img" alt="...">
+<div class="card bg-dark text-white mb-5 w-100 h-100 bg-transparent " id="featured-container">
+  <img src="images/shoeshoe.jpg" class="card-img " id="featured-img"  alt="...">
   <div class="card-img-overlay">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text">Last updated 3 mins ago</p>
+    <h5 class="card-title text-center" style="font-family: 'Bree Serif', serif; " font size="6">AIR MADULAX</h5>
+    <p class="card-text text-center">Highly resistance in water and applicable footwear light weight.</p>
+    
   </div>
 </div>
 
 <!-- CARD -->
+<h4 style="text-align:center; font-family: 'Bree Serif', serif;">FEATURED PRODUCTS</h4>
 
 <div class="container d-flex flex-wrap justify-content-between mb-5" id = "featured-products">
 	<!-- 

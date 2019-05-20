@@ -3,17 +3,33 @@
 <footer class = "d-flex flex-wrap justify-content-center">
 	<div class="container3 d-flex flex-wrap justify-content-center ">
 		<div class="col-lg-3">
-			<h6>ABOUT JARO INC.</h6>
-			<p>lorem ipsudom doremi</p>
+			<h6>ABOUT JRO Inc.</h6>
+			<p id="footer-p">JRO Inc. is a shoe shop company, and their About Us page goes above and beyond. They also include the history of the JRO soldiers they're named after, a detailed dissection of their logo and in-depth information about their manufacturing.</p>
 			
 		</div>
 		<div class="col-lg-3">
 			<h6>RETAIL & WORKSHOP</h6>
-			<p>lorem ipsudom doremi</p>
+			<div class = "d-flex flex-wrap">
+				<img src="images/home.png " id="icon-footer2">
+				<p id="footer-p">Somewhere in the Philippines.
+				#24.corner st. @ corner timog etc.</p>
+			</div>
+			<div class = "d-flex flex-wrap">
+				<img src="images/phone.png " id="icon-footer2">
+				<p id="footer-p">+63(91234567890)</p>
+			</div>
+
 			
 		</div>
 		<div class="col-lg-3">
 			<h6>GET SOCIAL WITH US!</h6>
+			<div class = "d-flex flex-wrap ">
+				<a href="facebook"><img src="images/facebook.png" id="icon-footer"></a>
+				<a href="yahoo"><img src="images/yahoo.png"  id="icon-footer"></a>
+				<a href="twitter"><img src="images/twitter.png"  id="icon-footer"></a>
+				<a href="google"><img src="images/google.png"  id="icon-footer"></a>
+				<a href="shoe"><img src="images/shoe.png"  id="icon-footer"></a>
+			</div>
 		</div> 
 	</div>
 </footer>

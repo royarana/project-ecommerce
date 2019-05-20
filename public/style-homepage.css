@@ -2,8 +2,12 @@ body{
 	background-image: url(images/backround1.jpg);
 }
 
+
 .navbar {
 	background-image: url(images/backround3.jpg);
+}
+#nav-my-account{
+	font-size: 10px;
 }
 
 #a1 {
@@ -17,6 +21,10 @@ body{
 
 .container-2{
 	margin-top: 50px;
+}
+#container-product{
+	font-family: 'Bree Serif', serif;
+	
 }
 
 #carouselExampleIndicators{
@@ -33,25 +41,45 @@ body{
   	border-top-right-radius: 25px;
   	border-top-left-radius: 25px;
 }
+#footer-p{
+	font-size: 10px;
+}
 
 footer{
 	background-color: blue;
 	margin-top: 10%;
+	font-family: 'Oleo Script', cursive;
 
 }
 
 footer .container3 {
 	height: 150px;
+	width: 800px;
+}
+#icon-footer{
+	width: 30px;
+	height: 30px;
+	display: flex;
+	
+
+}
+#icon-footer2{
+	width: 20px;
+	height: 20px;
+
 }
 
 .carding {
 	padding: 5px 5px 5px 5px;
 	flex: 0 0 21%; /* explanation below */
  	margin: 5px;
+ 	background-image: url(images/backround2.jpg);
 }
 
 .carding img {
 	height: 250px;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
 }
 
 .carding .card-body {
@@ -80,4 +108,17 @@ footer .container3 {
 
 .swal-wide{
     width:850px !important;
+}
+#featured-container{
+ background-color: none;
+}
+
+#featured-img{
+	width: 950px;
+	height: 500px;
+	display: block;
+   margin-left: auto;
+   margin-right: auto;
+   font-family: 'Bree Serif', serif;
+
 }
