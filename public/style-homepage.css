@@ -73,3 +73,11 @@ footer .container3 {
 #demo1 {
 	float: right !important;
 }
+
+.buy-item {
+	height: 300px;
+}
+
+.swal-wide{
+    width:850px !important;
+}

@@ -36,9 +36,52 @@
 		$('.logout').hide();
 	}
 
+	getCartItems();
+
 	$('#login').click(function(event) {
 		event.preventDefault();
 		login()
+	})
+
+	$('#checkout').click(function(event) {
+		showCartItems()
+	})
+
+	$(document).on('click', '.remove-cart-item', function() {
+		var button = this,
+			id = this.getAttribute('item-id'),
+			token = (window.user) ? window.user["token"] : null
+		
+		Swal.fire({
+			title:'Delete Item', text:'Are You Sure To Delete This Item?', icon:'warning',
+			showCancelButton: true,
+			cancelButtonColor: '#d33',
+		}).then(function(result) {
+			if (result.value) {
+				Swal.fire('Processing...!')
+				$.ajax({
+					method: "POST",
+					url: API_URL('cart/item/remove'),
+					dataType: "json",
+					data: {
+						id: id,
+						token: token
+					},
+					success: function(response) {
+						Swal.fire({
+							text: 'Success...!',
+							icon: 'success',
+							title: response.message
+						}).then(function() {
+							location.reload()
+						})
+					},
+					error: function(response) {
+						console.log(response)
+					}
+				})
+			}
+		})
 	})
 
 	function login() {
@@ -80,18 +123,72 @@
 		})
 	}
 
+	$(document).on('keyup', '.price', function() {
+		var price = this.getAttribute('price'),
+			quantity = this.value
+
+		$("#price").val(formatMoney(price * quantity))
+	})
+
+	function sendToCart($barcode, $quantity) {
+		Swal.fire('Processing...!')
+
+		var data = {
+			barcode: $barcode,
+			quantity: $quantity,
+			token: window.user.token
+		}
+		
+		if (!window.user.token) {
+			Swal.fire('Error..!', "Login First Before Buying an Item", "error")
+			return
+		}
+		
+		$.ajax({
+			method: "POST",
+			url: API_URL('cart/item/add'),
+			dataType: 'json',
+			data: data,
+			success: function(response) {
+				Swal.fire('Success...!', response.message,'success').then(function() { location.reload() })
+			}
+		})
+	}
+
 	$(document).on('click', '.buy-button', function() {
 		Swal.enableLoading();
 		var barcode = this.getAttribute('barcode')
-		alert(barcode)
-		Swal.fire({
-			type: 'info',
-			title: 'Buying Item ',
-			html: 
-				'<div class = "row pl-3">Quantity:</div>' +
-				'<input id="quantity" placeholder = "Quantity"  type = "text" class="swal2-input">' +
-				'<div class = "row pl-3">Total:</div>' +
-				'<input id="price" placeholder = "Total" type = "text" disabled class="swal2-input">',
+		
+		$.ajax({
+			method: "GET",
+			url: API_URL('product/barcode/' + barcode),
+			success: function(response) {
+				var product = response.data
+				Swal.fire({
+					type: 'info',
+					title: 'Buying Item',
+					html: 
+						'<img class="card-img-top ws-100 buy-item mb-5" alt="..." src="http://localhost/project-ecommerce/public/images/shoe18.jpg">'+
+						'<div class = "row"><h5 class = "col-lg-6 text-left">Product Name:</h5> <h6 class = "pt-1 text-right col-lg-6">'+product.description+'</h6></div>' +
+						'<div class = "row"><h5 class = "col-lg-6 text-left">Price:</h5> <h6 class = "pt-1 text-right col-lg-6">P '+formatMoney(product.price)+'</h6></div>' +
+						'<div class = "row pl-3">Quantity:</div>' +
+						'<input id="quantity" price = "'+product.price+'" placeholder = "Quantity"  type = "number" class="form-control price mt-1">' +
+						'<div class = "row pl-3">Total:</div>' +
+						'<input id="price" placeholder = "Total" type = "text" disabled class="form-control">',
+					showCancelButton: true,
+					cancelButtonColor: '#d33'
+				}).then(function(result) {
+					if (result.value) {
+						var quantity = $("#quantity").val()
+						if (quantity > 0) {
+							sendToCart(barcode, quantity)
+						} else {
+							Swal.fire('Error...!', "Quantity Should be Greater than 0", "error")
+						}
+					}
+				})
+			},
+			error: errorAjax
 		})
 	})
 </script>

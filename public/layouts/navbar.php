@@ -40,6 +40,116 @@
 			)
 		}
 
+		window.getCartItems = function () {
+			if (window.user.token) {
+				console.log('Retrieving Items')
+				$.ajax({
+					url: API_URL('cart?token='+window.user.token),
+					success: function(response) {
+						var items = response.data.items.length
+						if (items > 0) {
+							$("#checkout-items").html(items)
+							$("#checkout-items").removeClass("d-none")
+						}
+					},
+					error: function(response) {
+						console.log(response)
+					}
+				})
+			}
+		}
+
+		window.deleteItem = function(id, token) {
+			Swal.enableLoading();
+			$.ajax({
+				method: "PUT",
+				url: API_URL('cart/item/remove'),
+				data: {
+					id: id,
+					token: token
+				},
+				dataType: 'json',
+				success: function(response) {
+					success(response.message)
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			})
+		}
+
+		window.showCartItems = function () {
+			if (window.user.token) {
+				Swal.enableLoading();
+				$.ajax({
+					url: API_URL('cart?token='+window.user.token),
+					success: function(response) {
+						var items = response.data.items
+						var body = "",
+							thead = "<thead><tr><th>Desc</th><th>Price</th><th>Qty</th><th>Total</th><th>Delete</th></tr></thead>"
+							itemTotal = 0
+
+						items.forEach(function(row) {
+							var total = (row.price * row.quantity)
+							itemTotal += total
+							body += "<tr><td class = 'text-left'>"+row.description+"</td><td class = 'text-right'>"+formatMoney(row.price)+"</td><td class = 'text-right'>"+row.quantity+"</td><td class = 'text-right'>"+formatMoney(total)+"</td><td><button class = 'btn btn-danger btn-sm remove-cart-item' item-id = '"+row.id+"'><span class = 'text-white'>X</span></button></td></td></tr>"
+						})
+
+						body += "<tr><td class = 'text-left'></td><td class = 'text-right'></td><td class = 'text-left'>Item Total</td><td class = 'text-right'>"+formatMoney(itemTotal)+"</td><td></td></tr>"
+						body += "<tr><td class = 'text-left'></td><td class = 'text-right'></td><td class = 'text-left'>Address</td><td class = 'text-right'><input id = 'address' class = 'form-controll' /></td><td></td></tr>"
+						Swal.fire({
+							title: "Cart Items",
+							type: 'info',
+							customClass: 'swal-wide',
+							confirmButtonText: "Process",
+							showCancelButton: true,
+							cancelButtonColor: '#d33',
+							html: "<table class = 'w-100 table'>"+thead+body+"</table><br><div class = 'row text-right'></div>"
+						}).then(function(result) {
+							if(result.value) {
+								processCheckout(window.user.token, $("#address").val())
+							}
+						})
+					},
+					error: function(response) {
+						console.log(response)
+					}
+				})
+			}
+		}
+
+		window.processCheckout = function(token, $address) {
+			Swal.fire('Processing...!')
+			$.ajax({
+				url: API_URL('cart/checkout?token='+token),
+				data: { 
+					"address": $address
+    		},
+				success: function(response) {
+					Swal.fire('Success...!!', response.message, 'success').then(function() { location.reload() })
+				},
+				error: function(response) {
+					console.log(response)
+				}
+			})
+		}
+
+		window.formatMoney = function(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+			try {
+				decimalCount = Math.abs(decimalCount);
+				decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+				const negativeSign = amount < 0 ? "-" : "";
+
+				let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+				let j = (i.length > 3) ? i.length % 3 : 0;
+
+				return "P " + negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+			} catch (e) {
+				console.log(e)
+			}
+		};
+
 		window.createCard = function (obj) {
 				var divProd = document.createElement('div'),
 					cardBody = document.createElement('div'),
@@ -107,8 +217,8 @@
 		  		<div>
 			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			    <div class="navbar-nav" id="nav-my-account" >
-			      <a id="account" class="nav-item nav-link active" href="#">MY ACCOUNT </a>
-						<a id="checkout" class="nav-item nav-link" href="#">CHECKOUT</a>
+			      <a id="account" class="nav-item nav-link" href="#">MY ACCOUNT </a>
+						<a id="checkout" class="nav-item nav-link" href="#">CHECKOUT <span id = 'checkout-items' class = "d-none px-2 border border-info">4</span> </a>
 						
 						<a id="login" class="nav-item nav-link login" href="#">LOGIN</a>
 						<a id="register" class="nav-item nav-link login" href="#">REGISTER</a>
@@ -119,7 +229,7 @@
 
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			    <div class="navbar-nav" id="nav-home">
-			      <a class="nav-item nav-link active" href="index.php">HOME</a>
+			      <a class="nav-item nav-link" href="index.php">HOME</a>
 			      <a class="nav-item nav-link" href="products.php">PRODUCTS</a>
 			    </div>
 			</div>

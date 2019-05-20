@@ -154,6 +154,10 @@ Class Model extends Response {
 		$this->_values[] = $value;
 	}
 
+	function whereNull($col) {
+		$this->_where[] = array( "key" => "AND" , "value" => "{$col} IS NULL" );
+	}
+
 	function search($col, $value) {
 		$this->_where[] = array( "key" => "AND" , "value" => "{$col} LIKE ?" );
 		$this->_values[] = "%{$value}%";

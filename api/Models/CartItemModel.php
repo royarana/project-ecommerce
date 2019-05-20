@@ -28,11 +28,13 @@
 
         function getItems($user_id) {
             $this->where('status', ACTIVE);
+            $this->whereNull('cart_id');
             $this->where('user_id', $user_id);
 
             $res = $this->getRows();
 
             $this->where('status', ACTIVE);
+            $this->whereNull('cart_id');
             $this->where('user_id', $user_id);
 
             $this->select("SUM(quantity * price) as total");

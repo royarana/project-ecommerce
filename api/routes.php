@@ -5,6 +5,7 @@
 		"api/user/token" => "POST UserService/CheckToken",
 		"api/user/:id" => "PUT UserService/EditUser",
 		"api/product" => "POST ProductService/AddProduct",
+		"api/product/barcode/:barcode" => "GET ProductService/ReadProduct",
 		"api/product/links" => "GET ProductService/ProductLink",
 		"api/product/edit/:id" => "POST ProductService/EditProduct",
 		"api/product/active" => "PUT ProductService/ActiveProduct",
@@ -15,7 +16,8 @@
 		"api/product/list/:page" => "GET ProductService/GetProduct",
 		"api/product/list/:page/:search" => "GET ProductService/GetProduct",
 		"api/cart/item/add" => "POST CartService/AddItem",
-		"api/cart/item/remove" => "PUT CartService/RemoveItem",
+		"api/cart/item/remove" => "POST CartService/RemoveItem",
+		"api/cart/checkout" => "GET CartService/ProcessItems",
 		"api/cart" => "GET CartService/CartItems"
 	);
 ?>
