@@ -9,6 +9,12 @@
 </head>
 <script>
 	(function() {
+		window.user = localStorage.getItem('user')
+
+		if (window.user) {
+			window.user = JSON.parse(user)
+		}
+
 		window.API_URL = function(url) {
 			return "http://localhost/project-ecommerce/index.php/api/" + url
 		}
@@ -216,8 +222,10 @@
 		  	<div class=" d-flex justify-content-end">
 		  		<div>
 			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
 			    <div class="navbar-nav" id="nav-my-account" >
 			      <a id="account" class="nav-item nav-link" href="my-accounts.php">MY ACCOUNT </a>
+
 						<a id="checkout" class="nav-item nav-link" href="#">CHECKOUT <span id = 'checkout-items' class = "d-none px-2 border border-info">4</span> </a>
 						
 						<a id="login" class="nav-item nav-link login" href="#">LOGIN</a>
