@@ -7,7 +7,7 @@
           CT
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+          ADMIN - ECOMMERCE
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
