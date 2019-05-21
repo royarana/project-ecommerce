@@ -213,7 +213,10 @@
 
 					buttonDiv.className = "col-lg-12 px-0 mx-0 text-right"
 					buttonDiv.append(readMore)
-					buttonDiv.append(aBuy)
+					
+					if (window.user) {
+						buttonDiv.append(aBuy)
+					}
 
 					cardBody.append(cardTitle)
 					cardBody.append(pDesc)
