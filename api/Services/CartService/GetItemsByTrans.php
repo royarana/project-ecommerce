@@ -25,6 +25,7 @@
 
         function run() {
             $this->CartItemsModel->_orderBy = " ORDER BY ID DESC";
+            if($this->body['user']['user_id'] !== 2)
             $this->CartItemsModel->where('user_id', $this->body["user"]["user_id"]);
             $this->CartItemsModel->where('cart_id', $this->get["id"]);
 

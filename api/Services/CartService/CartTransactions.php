@@ -23,8 +23,13 @@
         }
 
         function run() {
-            $this->CartsModel->_orderBy = " ORDER BY ID DESC";
-            $this->CartsModel->where('user_id', $this->body['user']['id']);
+            $this->CartsModel->_orderBy = " ORDER BY carts.ID DESC";
+
+            if ($this->body["user"]["user_id"] !== 2) $this->CartsModel->where('user_id', $this->body['user']['user_id']);
+            
+            $this->CartsModel->join('users', 'users.id', 'carts.user_id');
+            $this->CartsModel->select('carts.*, users.full_name as full_name');
+
             $items = $this->CartsModel->getRows();
 
             $this->send(

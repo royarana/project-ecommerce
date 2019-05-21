@@ -74,3 +74,7 @@
 #description-td {
   width: 20%;
 }
+
+.swal-wide{
+    width:850px !important;
+}

@@ -25,9 +25,9 @@
             </a>
           </li>
           <li>
-            <a href="./categories.php">
+            <a href="./sales.php">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Categoriess</p>
+              <p>Sales</p>
             </a>
           </li>
         </ul>

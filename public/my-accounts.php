@@ -18,8 +18,7 @@
             <thead>
                 <tr>
                     <th>Trans #</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>Total</th>
                     <th>Date</th>
                     <th>Address</th>
                     <th>View</th>
@@ -130,7 +129,6 @@
 
                             tr.append(trans)
                             tr.append(price)
-                            tr.append(status)
                             tr.append(date)
                             tr.append(address)
                             tr.append(view)
