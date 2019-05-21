@@ -3,6 +3,8 @@
 <?php 
 		include './layouts/navbar.php';
 	?>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
 <!-- carousel -->
 
 <!--end carousel -->
@@ -16,7 +18,7 @@
 </div>
 <div class="row">
 	<div class = "col-lg-12">
-        <table class = "table table-dark table-striped" >
+        <table class = "table table-light" id = "table-history"  >
             <thead>
                 <tr>
                     <th>Trans #</th>
@@ -37,7 +39,7 @@
 <?php 
 	include './layouts/footer.php';
 ?>
-
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
     setTimeout(function() {
         $(document).ready(function() {
@@ -209,6 +211,9 @@
                             tr.append(view)
                             transHistory.append(tr)
                         })
+                        $("#table-history").DataTable({
+                            "order": [[ 0, 'desc' ]]
+                        });
                     },
                     error: function(response) {
                         console.log(response)
