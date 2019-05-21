@@ -241,28 +241,20 @@
 			    </div>
 		  	</div>
 		  	<div class=" d-flex justify-content-end">
-		  		<div>
-			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  		 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					 <div class="navbar-nav mt-5" id="nav-my-account" >
+					 		<a class="nav-item nav-link" href="index.php">HOME</a>
+				     		<a class="nav-item nav-link" href="products.php">PRODUCTS</a>
+				      		<a id="account" class="nav-item nav-link d-none" href="my-accounts.php">MY ACCOUNT </a>
 
-			    <div class="navbar-nav" id="nav-my-account" >
-			      <a id="account" class="nav-item nav-link d-none" href="my-accounts.php">MY ACCOUNT </a>
+							<a id="checkout" class="nav-item nav-link d-none" href="#">CHECKOUT <span id = 'checkout-items' class = "d-none px-2 border border-info">4</span> </a>
+							
+							<a id="login" class="nav-item nav-link login" href="#">LOGIN</a>
+							<a id="register" class="nav-item nav-link login" href="#">REGISTER</a>
 
-						<a id="checkout" class="nav-item nav-link d-none" href="#">CHECKOUT <span id = 'checkout-items' class = "d-none px-2 border border-info">4</span> </a>
-						
-						<a id="login" class="nav-item nav-link login" href="#">LOGIN</a>
-						<a id="register" class="nav-item nav-link login" href="#">REGISTER</a>
-
-						<a id="logout" class="nav-item nav-link logout" href="#">LOGOUT</a>
-			    </div>
-			  </div>
-
-			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			    <div class="navbar-nav" id="nav-home">
-			      <a class="nav-item nav-link" href="index.php">HOME</a>
-			      <a class="nav-item nav-link" href="products.php">PRODUCTS</a>
-			    </div>
-			</div>
-			  </div>
+							<a id="logout" class="nav-item nav-link logout" href="#">LOGOUT</a>
+				    </div>
+				</div>
 			</div>
 		</div>	
 	</nav>
