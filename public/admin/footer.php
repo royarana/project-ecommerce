@@ -63,6 +63,13 @@
       if(admin) {
         window.admin = JSON.parse(admin)
         loadAdmin(window.admin);
+        setTimeout(function() {
+        	$('#logout').click(function(event) {
+				event.preventDefault();
+				localStorage.removeItem('admin')
+				location.reload()
+			})
+        }, 500)
       } else {
         Swal.fire({
 			title: 'Login..!',

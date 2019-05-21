@@ -47,6 +47,9 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
+           <div class="collapse navbar-collapse justify-content-end" id="navigation">
+           <a href = '#' id = 'logout' >Logout</a>
+          </div>
         </div>
       </nav>
       <!-- End Navbar -->
