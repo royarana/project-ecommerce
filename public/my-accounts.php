@@ -11,7 +11,9 @@
 <?php 
 	include_once('layouts/search.php');
 ?>
-
+<div class = "row d-none" id = "info-row">
+    <div class = "col-lg-12 py-2"><button class = "btn btn-primary ml-2" id = "edit-info">EDIT INFO</button></div>
+</div>
 <div class="row">
 	<div class = "col-lg-12">
         <table class = "table table-dark table-striped" >
@@ -40,6 +42,79 @@
     setTimeout(function() {
         $(document).ready(function() {
             if (window.user) {
+                $("#info-row").removeClass('d-none')
+
+                $("#edit-info").click(function() {
+                   Swal.fire('Getting Information')
+                   $.ajax({
+                        url: API_URL('user/info?token='+window.user["token"]),
+                        success: function(response) {
+                            var data = response.data
+                            console.log(data)
+                            var html =
+                                '<div class = "row pl-3">Email:</div>' +
+                                '<input id="user-email" disabled placeholder = "Email" type = "email" class="swal2-input" value = "'+data.email+'">' +
+                                '<div class = "row pl-3">Full Name:</div>' +
+                                '<input id="fullname" placeholder = "Full Name" type = "text" class="swal2-input"  value = "'+data.full_name+'">' +
+                                '<div class = "row pl-3">Password:</div>' +
+                                '<input id="password" placeholder = "Password" type = "password" class="swal2-input"  value = "'+data.password+'">'+
+                                '<div class = "row pl-3">Gender:</div>' +
+                                '<select id = "gender" class = "swal2-input"><option value = "F">FEMALE</option><option value = "M">MALE</option></select>'+
+                                '<div class = "row pl-3">Birthdate:</div>' +
+                                '<input id="date" placeholder = "Birthdate" type = "date" class="swal2-input"  value = "'+data.birthday+'">'
+
+                            setTimeout(function() {
+                                $('#gender').val(data.gender)
+                            }, 500)
+
+                            var url = API_URL('user/edit/'+data.id)
+
+                            Swal.fire({
+                                title: "Edit Info",
+                                html: html,
+                                icon: 'info',
+                                showCancelButton: true,
+                                cancelButtonColor: "#d33"
+                            }).then(function(result) {
+                                if (result.value) {
+                                    var user = $('#user-email').val()
+                                    var password = $('#password').val()
+                                    var fullname = $('#fullname').val()
+                                    var date = $('#date').val()
+                                    var gender = $( "#gender option:selected" ).val()
+
+                                    var data= {
+                                        email: user,
+                                        password: password,
+                                        full_name: fullname,
+                                        birthday: date,
+                                        gender: gender
+                                    }
+                                    /*
+                    'full_name'    => 'required|max_len,100|min_len,6',
+                                    'password'    => 'required|max_len,100|min_len,6',
+                                    'gender' => 'required|max_len,1|contains,M F',
+                                    'birthday' => 'required|date',
+                                    'email' => 'required|valid_email'
+                                    */
+                                   
+                                    $.ajax({
+                                        url: url,
+                                        method: 'POST',
+                                        dataType: 'json',
+                                        data:data,
+                                        success: function(response) {
+                                            success(response.message)
+                                        },
+                                        error: function(response) {
+                                            console.log(response)
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                   })
+                })
 
                 $(document).on('click', '.search', function() {
                     var transId = this.getAttribute('trans-id');

@@ -22,13 +22,19 @@
             $this->validationErr($rules);
         }
 
-        function middleware() {
-            $this->body["password"] = shaPassword($this->body["password"]);
-        }
-
         function run() {
             $this->UsersModel->where("id", $this->params["id"]);
+
+            $updateUser = $this->UsersModel->getOne();
+            if ($updateUser["password"] === $this->body["password"]) {
+                unset($this->body["password"]);
+            } else {
+                $this->body["password"] = shaPassword($this->body["password"]);
+            }
+
+            $this->UsersModel->where("id", $this->params["id"]);
             $models = $this->UsersModel->update($this->body);
+            
             $this->send(
                 $models,
                 "User Updated Successfully...!",

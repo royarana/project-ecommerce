@@ -181,7 +181,6 @@
 					pDesc.className = "card-text"
 					var description = document.createElement('label')
 					description.innerHTML = 'Desc: ' + _100char(obj.info) + "..."
-					pDesc.append(description)
 					var priceLbl = document.createElement('label')
 					priceLbl.innerHTML = 'Price: '+ formatMoney(obj.price) + "</br>"
 
@@ -194,10 +193,7 @@
 					var inventoryLbl = document.createElement('label')
 					inventoryLbl.innerHTML = 'Stocks: '+ (obj.inventory).replace(".0000", "") + " Items Left</br>"
 
-					pDesc.append(priceLbl)
-					pDesc.append(categoryLbl)
-					pDesc.append(genderLbl)
-					pDesc.append(inventoryLbl)
+
 
 					aBuy.append(buyIcon)
 					readMore.append(readIcon)
@@ -211,16 +207,23 @@
 
 					var buttonDiv = document.createElement('div')
 
-					buttonDiv.className = "col-lg-12 px-0 mx-0 text-right"
+					buttonDiv.className = "col-lg-12 px-0 mx-0 mb-2 text-right"
 					buttonDiv.append(readMore)
-					
+
 					if (window.user) {
 						buttonDiv.append(aBuy)
 					}
 
+					cardBody.append(buttonDiv)
+					pDesc.append(description)
+					pDesc.append(priceLbl)
+					pDesc.append(categoryLbl)
+					pDesc.append(genderLbl)
+					pDesc.append(document.createElement('br'))
+					pDesc.append(inventoryLbl)
+
 					cardBody.append(cardTitle)
 					cardBody.append(pDesc)
-					cardBody.append(buttonDiv)
 					divProd.append(featuredImg)
 					divProd.append(cardBody)
 
