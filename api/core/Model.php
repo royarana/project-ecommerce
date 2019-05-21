@@ -149,9 +149,10 @@ Class Model extends Response {
 	}
 
 	function where($col, $value, $operator = "=") {
-		$question = ($operator === "IN") ? '(?)' : '?';
+		$question = ($operator === "IN") ? "({$value})" : '?';
 		$this->_where[] = array( "key" => "AND" , "value" => "{$col} ${operator} {$question}" );
-		$this->_values[] = $value;
+
+		if($operator !== "IN") $this->_values[] = $value;
 	}
 
 	function whereNull($col) {

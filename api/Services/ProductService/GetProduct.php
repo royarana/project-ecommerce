@@ -42,7 +42,8 @@
             
             if(!empty($this->get)) {
                 if (isset($this->get["gender"])) {
-                    $gender = implode(",", $this->get["gender"]);
+                    $gender = "'".implode("','", $this->get["gender"])."'";
+                    //print_r($gender); exit;
                     $this->ProductsModel->where('gender', $gender, "IN");
                 }
 
