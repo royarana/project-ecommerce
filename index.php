@@ -43,9 +43,9 @@
 			parse_str($_SERVER["QUERY_STRING"], $GET);
 		}
 		else {
-			$content = trim(file_get_contents('php://input'));
-			parse_str($_SERVER["QUERY_STRING"], $GET);
-			$body = json_decode($content, true);
+			parse_str(file_get_contents('php://input'), $body);
+			print_r($body);
+			exit;
 		}
 
 		foreach($routes as $key => $value) {
