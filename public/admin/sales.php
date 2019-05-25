@@ -62,7 +62,7 @@
               <div class="card-header">
                 <div class = "row">
                     <div class = "col-lg-6">
-                        <h4 class="card-title"> Sales Table</h4>
+                        <h4 class="card-title"> Sales Table <a id = "sales" href = "" class = "btn btn-primary text-right" target = "_blank">EXCEL</a></h4>
                     </div>
                 </div>
               </div>
@@ -138,10 +138,10 @@
   <script>
       function loadAdmin(admin) {
         $(document).ready(function() {
+          $("#sales").attr("href", API_URL('cart/generate-sales'));
         	$(document).on('click', '.search', function() {
                     var transId = this.getAttribute('trans-id');
                     Swal.fire('Getting Items in Transaction # '+transId)
-
                     $.ajax({
                         url: API_URL('cart/trans-item'),
                         data: {

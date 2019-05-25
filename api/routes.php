@@ -21,6 +21,7 @@
 		"api/cart/trans-item" => "GET CartService/GetItemsByTrans",
 		"api/cart/checkout" => "GET CartService/ProcessItems",
 		"api/cart/transactions" => "GET CartService/CartTransactions",
+		"api/cart/generate-sales" => "GET CartService/SalesExcel",
 		"api/cart" => "GET CartService/CartItems"
 	);
 ?>
